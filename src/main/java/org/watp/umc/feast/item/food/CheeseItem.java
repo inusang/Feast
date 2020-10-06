@@ -2,6 +2,8 @@ package org.watp.umc.feast.item.food;
 
 import java.util.Map;
 
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.item.IProduceItem;
 import org.watp.umc.feast.math.Constants;
@@ -17,7 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class CheeseItem extends Item implements IProduceItem {
 	public CheeseItem() {
-		super(new Properties().group(ItemGroup.FOOD).rarity(Rarity.UNCOMMON).food(new Food.Builder().hunger(7).saturation(1f).build()));
+		super(new Properties().group(ItemGroup.FOOD).rarity(Rarity.UNCOMMON).food(new Food.Builder().hunger(7).saturation(1f).effect(()->new EffectInstance(Effects.SLOWNESS,20*Constants.TICK_EACH_SECOND),0.2f).build()));
 	}
 	
 	@Override
