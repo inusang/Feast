@@ -131,7 +131,7 @@ public class MilkRefineMachineTileEntity extends TileEntity implements ICustomCo
 	}
 	
 	/**
-	 * func_name: read(BlockState,CompoundNBT)</br>
+	 * read(BlockState,CompoundNBT)</br>
 	 */
 	@Override
 	public void func_230337_a_(BlockState bs, CompoundNBT compound) {

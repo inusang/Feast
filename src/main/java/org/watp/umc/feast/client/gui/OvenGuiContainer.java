@@ -22,7 +22,7 @@ public class OvenGuiContainer extends ContainerScreen<OvenContainer> {
 	}
 	
 	/**
-	 * func_name: drawScreen(MatrixStack,int,int,float)</br>
+	 * drawScreen(MatrixStack,int,int,float)</br>
 	 */
 	@Override
 	public void func_230430_a_(MatrixStack mStack, int mouseX, int mouseY, float partial) {
@@ -32,7 +32,7 @@ public class OvenGuiContainer extends ContainerScreen<OvenContainer> {
 	}
 	
 	/**
-	 * func_name: drawGuiContainerBackgroundLayer(MatrixStack,float,int,int)</br>
+	 * drawGuiContainerBackgroundLayer(MatrixStack,float,int,int)</br>
 	 * field_230708_k_: width(int)</br>
 	 * field_230709_l_: height(int)</br>
 	 * func_238474_b_: AbstractGui.blit</br>
