@@ -1,0 +1,15 @@
+{
+	"item.feast.wheatmeal": "小麦粉",
+	"item.feast.salt": "盐",
+	"item.feast.cream": "奶油",
+	"item.feast.butter": "黄油",
+	"item.feast.cheese": "奶酪",
+	"item.feast.apple_pie": "苹果派",
+	"item.feast.potato_beef_pie": "土豆牛肉馅饼",
+	"item.feast.pizza_part": "块状披萨",
+	"item.feast.cod_bar": "鳕鱼条",
+	"item.feast.salmon_roll": "鲑鱼卷",
+	"block.feast.oven": "烤箱",
+	"block.feast.milk_refine_machine": "乳制品精炼机",
+	"block.feast.salt_ore": "盐矿石"
+}

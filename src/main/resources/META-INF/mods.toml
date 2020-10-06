@@ -1,0 +1,25 @@
+modLoader="javafml" #mandatory
+loaderVersion="[32,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
+issueTrackerURL="http://my.issue.tracker/" #optional
+[[mods]] #mandatory
+modId="feast" #mandatory
+version="1.16.3-1.0.0" #mandatory
+displayName="Feast" #mandatory
+authors="ou" #optional
+description='''
+Supply more foods and menus
+'''
+[[dependencies.feast]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[32,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.feast]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.3]"
+    ordering="NONE"
+    side="BOTH"
+

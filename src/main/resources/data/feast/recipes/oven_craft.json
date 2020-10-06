@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern" : [
+		"idi",
+		"ifi",
+		"i#i"
+	],
+	"key": {
+		"f": {
+			"item": "minecraft:furnace"
+		},
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"d": {
+			"item": "minecraft:diamond"
+		},
+		"#": {
+			"item": "minecraft:glass_pane"
+		}
+	},
+	"result" : {
+		"item": "feast:oven",
+		"count": 1
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"variants": {
+		"facing=north,oven_stat=0": { "model": "feast:block/oven/oven_model" },
+        "facing=south,oven_stat=0": { "model": "feast:block/oven/oven_model", "y": 180 },
+        "facing=west,oven_stat=0":  { "model": "feast:block/oven/oven_model", "y": 270 },
+        "facing=east,oven_stat=0":  { "model": "feast:block/oven/oven_model", "y": 90 },
+        "facing=north,oven_stat=1": { "model": "feast:block/oven/oven_standby_model" },
+        "facing=south,oven_stat=1": { "model": "feast:block/oven/oven_standby_model", "y": 180 },
+        "facing=west,oven_stat=1": { "model": "feast:block/oven/oven_standby_model", "y": 270 },
+        "facing=east,oven_stat=1": { "model": "feast:block/oven/oven_standby_model", "y": 90 },
+        "facing=north,oven_stat=2": { "model": "feast:block/oven/oven_on_model" },
+        "facing=south,oven_stat=2": { "model": "feast:block/oven/oven_on_model", "y": 180 },
+        "facing=west,oven_stat=2": { "model": "feast:block/oven/oven_on_model", "y": 270 },
+        "facing=east,oven_stat=2": { "model": "feast:block/oven/oven_on_model", "y": 90 },
+        "facing=north,oven_stat=3": { "model": "feast:block/oven/oven_danger_model" },
+        "facing=south,oven_stat=3": { "model": "feast:block/oven/oven_danger_model", "y": 180 },
+        "facing=west,oven_stat=3": { "model": "feast:block/oven/oven_danger_model", "y": 270 },
+        "facing=east,oven_stat=3": { "model": "feast:block/oven/oven_danger_model", "y": 90 }
+	}
+}

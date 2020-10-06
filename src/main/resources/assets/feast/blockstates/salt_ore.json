@@ -1,0 +1,5 @@
+{
+	"variants": {
+		"": { "model": "feast:block/salt_ore_model" }
+	}
+}

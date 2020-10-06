@@ -1,0 +1,15 @@
+{
+	"item.feast.wheatmeal": "wheatmeal",
+	"item.feast.salt": "salt",
+	"item.feast.cream": "cream",
+	"item.feast.butter": "butter",
+	"item.feast.cheese": "cheese",
+	"item.feast.apple_pie": "apple pie",
+	"item.feast.potato_beef_pie": "potato beef pie",
+	"item.feast.pizza_part": "part of pizza",
+	"item.feast.cod_bar": "cod bar",
+	"item.feast.salmon_roll": "salmon_roll",
+	"block.feast.oven": "oven",
+	"block.feast.milk_refine_machine": "milk refine machine",
+	"block.feast.salt_ore": "salt ore"
+}

@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "feast:salt",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+              	"min": 12,
+              	"max": 15
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": {
+              	"min": 2,
+              	"max": 6
+              }
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}
