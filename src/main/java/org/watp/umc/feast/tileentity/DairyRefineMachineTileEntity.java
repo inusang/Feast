@@ -2,7 +2,7 @@ package org.watp.umc.feast.tileentity;
 
 import java.util.Map;
 
-import org.watp.umc.feast.inventory.MilkRefineMachineContainer;
+import org.watp.umc.feast.inventory.DairyRefineMachineContainer;
 import org.watp.umc.feast.item.IProduceItem;
 import org.watp.umc.feast.recipe.MRMRecipe;
 import org.watp.umc.feast.registry.TileEntityRegistry;
@@ -29,7 +29,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
-public class MilkRefineMachineTileEntity extends TileEntity implements ICustomContainer,ITickableTileEntity {
+public class DairyRefineMachineTileEntity extends TileEntity implements ICustomContainer,ITickableTileEntity {
 	private ItemStackHandler MRMMaterialSlot;
 	private ItemStackHandler productionSlot;
 	
@@ -41,7 +41,7 @@ public class MilkRefineMachineTileEntity extends TileEntity implements ICustomCo
 	private int progressVisible;
 	private Item productionTarget;
 	
-	public MilkRefineMachineTileEntity() {
+	public DairyRefineMachineTileEntity() {
 		super(TileEntityRegistry.tileEntityMilkRefineMachine.get());
 		MRMMaterialSlot=new ItemStackHandler(1);
 		productionSlot=new ItemStackHandler(1);
@@ -145,7 +145,7 @@ public class MilkRefineMachineTileEntity extends TileEntity implements ICustomCo
 	
 	@Override
 	public Container createMenu(int windowId, PlayerInventory pi, PlayerEntity pe) {
-		return new MilkRefineMachineContainer(windowId,pi,this.world,this.pos);
+		return new DairyRefineMachineContainer(windowId,pi,this.world,this.pos);
 	}
 	
 	@Override

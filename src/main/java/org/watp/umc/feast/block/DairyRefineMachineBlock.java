@@ -2,7 +2,7 @@ package org.watp.umc.feast.block;
 
 import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.network.PacketMRMStatSync;
-import org.watp.umc.feast.tileentity.MilkRefineMachineTileEntity;
+import org.watp.umc.feast.tileentity.DairyRefineMachineTileEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -27,10 +27,10 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class MilkRefineMachineBlock extends Block {
+public class DairyRefineMachineBlock extends Block {
 	protected static final DirectionProperty FACING=HorizontalBlock.HORIZONTAL_FACING;
 	
-	public MilkRefineMachineBlock() {
+	public DairyRefineMachineBlock() {
 		super(Properties.create(Material.IRON).hardnessAndResistance(3f).harvestTool(ToolType.PICKAXE).harvestLevel(1));
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 	}
@@ -50,7 +50,7 @@ public class MilkRefineMachineBlock extends Block {
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
 		if (!world.isRemote()) {
-			final MilkRefineMachineTileEntity te=(MilkRefineMachineTileEntity) world.getTileEntity(pos);
+			final DairyRefineMachineTileEntity te=(DairyRefineMachineTileEntity) world.getTileEntity(pos);
 			if (te!=null) {
 				NetWorking.INSTANCE.send(PacketDistributor.SERVER.noArg()
 						,new PacketMRMStatSync(pos,te.getProgressVisible()));
@@ -77,7 +77,7 @@ public class MilkRefineMachineBlock extends Block {
 	
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new MilkRefineMachineTileEntity();
+		return new DairyRefineMachineTileEntity();
 	}
 	
 	@Override

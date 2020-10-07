@@ -1,7 +1,7 @@
 package org.watp.umc.feast.client.gui;
 
 import org.watp.umc.feast.Feast;
-import org.watp.umc.feast.inventory.MilkRefineMachineContainer;
+import org.watp.umc.feast.inventory.DairyRefineMachineContainer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
@@ -10,10 +10,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class MilkRefineMachineGuiContainer extends ContainerScreen<MilkRefineMachineContainer> {
+public class DairyRefineMachineGuiContainer extends ContainerScreen<DairyRefineMachineContainer> {
 	private static final ResourceLocation TEXTURE=new ResourceLocation(Feast.MODID+":textures/gui/container/milk_refine_machine_table.png");
 	
-	public MilkRefineMachineGuiContainer(MilkRefineMachineContainer container,PlayerInventory pi,ITextComponent title) {
+	public DairyRefineMachineGuiContainer(DairyRefineMachineContainer container, PlayerInventory pi, ITextComponent title) {
 		super(container,pi,title);
 	}
 	

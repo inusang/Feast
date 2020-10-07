@@ -3,7 +3,7 @@ package org.watp.umc.feast.item;
 import java.util.Map;
 
 import org.watp.umc.feast.math.Constants;
-import org.watp.umc.feast.tileentity.MilkRefineMachineTileEntity;
+import org.watp.umc.feast.tileentity.DairyRefineMachineTileEntity;
 
 import com.google.common.collect.Maps;
 
@@ -19,7 +19,7 @@ public class CreamItem extends Item implements IProduceItem {
 	
 	@Override
 	public Class<? extends TileEntity> produceIn() {
-		return MilkRefineMachineTileEntity.class;
+		return DairyRefineMachineTileEntity.class;
 	}
 	
 	@Override
