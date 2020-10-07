@@ -179,7 +179,7 @@ public class OvenTileEntity extends TileEntity implements ICustomContainer,ITick
 					this.world.createExplosion(null,this.getPos().getX(),this.getPos().getY(),this.getPos().getZ(),4,Explosion.Mode.DESTROY);
 					return;
 				}
-				remainingEnergy=remainingEnergy<3?0:remainingEnergy-3;
+				remainingEnergy=remainingEnergy<2?0:remainingEnergy-2;
 				if (temperature>4072 && remainingCooling==0) {
 					this.world.setBlockState(this.pos,this.world.getBlockState(pos).with(OvenBlock.OVEN_STAT,3));
 				}
@@ -200,7 +200,7 @@ public class OvenTileEntity extends TileEntity implements ICustomContainer,ITick
 		if (remainingCooling>0) {
 			if (temperature>0) {
 				temperature=temperature<2?0:temperature-2;
-				remainingCooling=remainingCooling<3?0:remainingCooling-3;
+				remainingCooling=remainingCooling<2?0:remainingCooling-2;
 			}
 			else {
 				--remainingCooling;
