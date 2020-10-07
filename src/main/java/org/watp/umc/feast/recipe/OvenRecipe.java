@@ -18,7 +18,7 @@ public class OvenRecipe {
 	
 	private static final Item[] RECIPE_POTATO_BEEF_PIE=new Item[]
 			{Feast.Items.WHEATMEAL,Feast.Items.SALT,Feast.Items.WHEATMEAL,
-			 Items.POTATO,Items.COOKED_BEEF,Items.POTATO,
+			 Items.BAKED_POTATO,Items.COOKED_BEEF,Items.BAKED_POTATO,
 			 Feast.Items.WHEATMEAL,Items.EGG,Feast.Items.WHEATMEAL};
 	
 	private static final Item[] RECIPE_PIZZA_PART=new Item[]
@@ -28,12 +28,12 @@ public class OvenRecipe {
 	
 	private static final Item[] RECIPE_COD_PASTRY=new Item[]
 			{Feast.Items.WHEATMEAL,Feast.Items.SALT,Feast.Items.WHEATMEAL,
-			 Feast.Items.WHEATMEAL,Items.COD,Feast.Items.WHEATMEAL,
+			 Feast.Items.WHEATMEAL,Items.COOKED_COD,Feast.Items.WHEATMEAL,
 			 Feast.Items.WHEATMEAL,Items.EGG,Feast.Items.WHEATMEAL};
 	
 	private static final Item[] RECIPE_SALMON_ROLL=new Item[]
 			{Feast.Items.WHEATMEAL,Feast.Items.SALT,Feast.Items.WHEATMEAL,
-			 Items.AIR,Items.SALMON,Items.AIR,							//cabbage,cucumber
+			 Items.AIR,Items.COOKED_SALMON,Items.AIR,							//cabbage,cucumber
 			 Feast.Items.WHEATMEAL,Items.EGG,Feast.Items.WHEATMEAL
 			};
 	
