@@ -24,7 +24,7 @@ public abstract class ItemRegistry {
 	
 	public static RegistryObject<Item> OVEN=
 			ITEMS.register("oven",() -> new BlockItem(BlockRegistry.blockOven.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
-	public static RegistryObject<Item> Dairy_MACHINE=
+	public static RegistryObject<Item> DAIRY_MACHINE=
 			ITEMS.register("milk_refine_machine",() -> new BlockItem(BlockRegistry.blockDairyMachine.get(),new Item.Properties().group(ItemGroup.DECORATIONS)));
 	public static RegistryObject<Item> SALT_ORE=
 			ITEMS.register("salt_ore",() -> new BlockItem(BlockRegistry.blockSaltOre.get(),new Item.Properties().group(ItemGroup.DECORATIONS)));
