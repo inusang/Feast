@@ -16,7 +16,7 @@ import net.minecraftforge.registries.ObjectHolder;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.watp.umc.feast.inventory.MilkRefineMachineContainer;
+import org.watp.umc.feast.inventory.DairyMachineContainer;
 import org.watp.umc.feast.inventory.OvenContainer;
 import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.proxy.ClientProxy;
@@ -26,7 +26,7 @@ import org.watp.umc.feast.registry.BlockRegistry;
 import org.watp.umc.feast.registry.ContainerTypeRegistry;
 import org.watp.umc.feast.registry.ItemRegistry;
 import org.watp.umc.feast.registry.TileEntityRegistry;
-import org.watp.umc.feast.tileentity.MilkRefineMachineTileEntity;
+import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 import org.watp.umc.feast.tileentity.OvenTileEntity;
 
 @Mod(value=Feast.MODID)
@@ -102,7 +102,7 @@ public class Feast
    @ObjectHolder(Feast.MODID)
 	public static class Items {
 	   public static final Item OVEN=null;
-	   public static final Item MILK_REFINE_MACHINE=null;
+	   public static final Item DAIRY_MACHINE=null;
 	   
 	    public static final Item WHEATMEAL=null;
 	    public static final Item SALT=null;
@@ -120,18 +120,18 @@ public class Feast
 	@ObjectHolder(Feast.MODID)
 	public static class Blocks {
 		public static final Block OVEN=null;
-		public static final Block MILK_REFINE_MACHINE=null;
+		public static final Block DAIRY_MACHINE=null;
 	}
 
 	@ObjectHolder(Feast.MODID)
 	public static class ContainerTypes {
 		public static final ContainerType<OvenContainer> OVEN=null;
-		public static final ContainerType<MilkRefineMachineContainer> MILK_REFINE_MACHINE=null;
+		public static final ContainerType<DairyMachineContainer> DAIRY_MACHINE=null;
 	}
 	
 	@ObjectHolder(Feast.MODID)
 	public static class TileEntities {
 		public static final TileEntityType<OvenTileEntity> OVEN=null;
-		public static final TileEntityType<MilkRefineMachineTileEntity> MILK_REFINE_MACHINE=null;
+		public static final TileEntityType<DairyMachineTileEntity> DAIRY_MACHINE=null;
 	}
 }

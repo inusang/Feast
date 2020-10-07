@@ -7,7 +7,7 @@ import net.minecraft.potion.Effects;
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.item.IProduceItem;
 import org.watp.umc.feast.math.Constants;
-import org.watp.umc.feast.tileentity.DairyRefineMachineTileEntity;
+import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 
 import com.google.common.collect.Maps;
 
@@ -24,7 +24,7 @@ public class CheeseItem extends Item implements IProduceItem {
 	
 	@Override
 	public Class<? extends TileEntity> produceIn() {
-		return DairyRefineMachineTileEntity.class;
+		return DairyMachineTileEntity.class;
 	}
 	
 	@Override

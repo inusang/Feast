@@ -4,7 +4,7 @@ import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.inventory.slot.ICheckedSlot;
 import org.watp.umc.feast.inventory.slot.ProductionSlot;
 import org.watp.umc.feast.registry.ContainerTypeRegistry;
-import org.watp.umc.feast.tileentity.DairyRefineMachineTileEntity;
+import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -21,18 +21,18 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class DairyRefineMachineContainer extends CommonInteractContainer {
-	private DairyRefineMachineTileEntity te;
+public class DairyMachineContainer extends CommonInteractContainer {
+	private DairyMachineTileEntity te;
 	
-	public DairyRefineMachineContainer(int windowId, PlayerInventory pi, World world, BlockPos pos) {
-		super(ContainerTypeRegistry.containerMilkRefineMachine.get(),windowId);
-		this.te=(DairyRefineMachineTileEntity) world.getTileEntity(pos);
+	public DairyMachineContainer(int windowId, PlayerInventory pi, World world, BlockPos pos) {
+		super(ContainerTypeRegistry.containerDairyMachine.get(),windowId);
+		this.te=(DairyMachineTileEntity) world.getTileEntity(pos);
 		this.bindPlayerInventory(pi);
 		this.bindOtherSlots(te);
 		this.trackVars();
 	}
 	
-	public DairyRefineMachineTileEntity getTileEntity() {
+	public DairyMachineTileEntity getTileEntity() {
 		return this.te;
 	}
 	

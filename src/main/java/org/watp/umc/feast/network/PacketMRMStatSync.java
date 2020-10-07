@@ -2,7 +2,7 @@ package org.watp.umc.feast.network;
 
 import java.util.function.Supplier;
 
-import org.watp.umc.feast.tileentity.MilkRefineMachineTileEntity;
+import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
@@ -30,7 +30,7 @@ public class PacketMRMStatSync {
 	
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(()-> {
-			MilkRefineMachineTileEntity te=(MilkRefineMachineTileEntity) Minecraft.getInstance().world.getTileEntity(pos);
+			DairyMachineTileEntity te=(DairyMachineTileEntity) Minecraft.getInstance().world.getTileEntity(pos);
 			te.setProgressVisible(progressVisible);
 		});
 	}

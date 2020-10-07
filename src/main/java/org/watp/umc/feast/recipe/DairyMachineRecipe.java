@@ -5,7 +5,7 @@ import org.watp.umc.feast.Feast;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
-public class MRMRecipe {
+public class DairyMachineRecipe {
 	public static Item match(Item input) {
 		if (input==Items.MILK_BUCKET) {
 			return Feast.Items.CREAM;

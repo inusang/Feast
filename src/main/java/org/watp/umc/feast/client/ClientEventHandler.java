@@ -1,7 +1,7 @@
 package org.watp.umc.feast.client;
 
 import org.watp.umc.feast.Feast;
-import org.watp.umc.feast.client.gui.DairyRefineMachineGuiContainer;
+import org.watp.umc.feast.client.gui.DairyMachineGuiContainer;
 import org.watp.umc.feast.client.gui.OvenGuiContainer;
 import org.watp.umc.feast.registry.ContainerTypeRegistry;
 
@@ -18,7 +18,7 @@ public class ClientEventHandler {
 		@SubscribeEvent
 		public static void registerClientGuiFactories(final FMLClientSetupEvent event) {
 			ScreenManager.registerFactory(ContainerTypeRegistry.containerOven.get(),OvenGuiContainer::new);
-			ScreenManager.registerFactory(ContainerTypeRegistry.containerMilkRefineMachine.get(), DairyRefineMachineGuiContainer::new);
+			ScreenManager.registerFactory(ContainerTypeRegistry.containerDairyMachine.get(), DairyMachineGuiContainer::new);
 		}
 	}
 }

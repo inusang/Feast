@@ -1,7 +1,7 @@
 package org.watp.umc.feast.registry;
 
 import org.watp.umc.feast.Feast;
-import org.watp.umc.feast.inventory.MilkRefineMachineContainer;
+import org.watp.umc.feast.inventory.DairyMachineContainer;
 import org.watp.umc.feast.inventory.OvenContainer;
 
 import net.minecraft.client.Minecraft;
@@ -21,7 +21,7 @@ public abstract class ContainerTypeRegistry {
 			()->{ return IForgeContainerType.create(
 			(int windowId,PlayerInventory pi,PacketBuffer extraData)->{ return new OvenContainer(windowId,pi,Minecraft.getInstance().world,extraData.readBlockPos()); }); });
 	
-	public static RegistryObject<ContainerType<MilkRefineMachineContainer>> containerMilkRefineMachine=containers.register("milk_refine_machine",
+	public static RegistryObject<ContainerType<DairyMachineContainer>> containerDairyMachine=containers.register("milk_refine_machine",
 			()->{ return IForgeContainerType.create(
-			(int windowId,PlayerInventory pi,PacketBuffer extraData)->{ return new MilkRefineMachineContainer(windowId,pi,Minecraft.getInstance().world,extraData.readBlockPos()); }); });
+			(int windowId,PlayerInventory pi,PacketBuffer extraData)->{ return new DairyMachineContainer(windowId,pi,Minecraft.getInstance().world,extraData.readBlockPos()); }); });
 }
