@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class ApplePieItem extends Item implements IProduceItem {
 	public ApplePieItem() {
-		super(new Properties().group(ItemGroup.FOOD).rarity(Rarity.UNCOMMON).food(new Food.Builder().hunger(8).saturation(0.8f).effect(()->new EffectInstance(Effects.REGENERATION,10*Constants.TICK_EACH_SECOND),1).build()));
+		super(new Properties().group(ItemGroup.FOOD).rarity(Rarity.UNCOMMON).food(new Food.Builder().hunger(8).saturation(1f).effect(()->new EffectInstance(Effects.REGENERATION,10*Constants.TICK_EACH_SECOND),1).build()));
 	}
 	
 	@Override
