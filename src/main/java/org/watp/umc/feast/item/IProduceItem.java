@@ -23,7 +23,5 @@ public interface IProduceItem {
 		return 1;
 	}
 	
-	default int progressCount() {
-		return 0;
-	}
+	int progressCount();
 }
