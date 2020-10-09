@@ -99,14 +99,13 @@ public class Feast
         }
     }
     
-   @ObjectHolder(Feast.MODID)
 	public static class Items {
 	   public static final Item OVEN=null;
 	   public static final Item DAIRY_MACHINE=null;
-	   
+
 	    public static final Item WHEATMEAL=null;
 	    public static final Item SALT=null;
-	    
+
 	    public static final Item CREAM=null;
 	    public static final Item BUTTER=null;
 	    public static final Item CHEESE=null;
@@ -116,7 +115,7 @@ public class Feast
 		public static final Item COD_BAR=null;
 		public static final Item SALMON_ROLL=null;
 	}
-	
+
 	@ObjectHolder(Feast.MODID)
 	public static class Blocks {
 		public static final Block OVEN=null;
@@ -128,7 +127,7 @@ public class Feast
 		public static final ContainerType<OvenContainer> OVEN=null;
 		public static final ContainerType<DairyMachineContainer> DAIRY_MACHINE=null;
 	}
-	
+
 	@ObjectHolder(Feast.MODID)
 	public static class TileEntities {
 		public static final TileEntityType<OvenTileEntity> OVEN=null;

@@ -150,7 +150,7 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TranslationTextComponent("block.feast.milk_refine_machine");
+		return new TranslationTextComponent("block.feast.dairy_machine");
 	}
 	
 	@Override

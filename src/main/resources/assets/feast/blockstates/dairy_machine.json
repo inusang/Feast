@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": { "model": "feast:block/dairy_machine/dairy_machine_model" },
+		"facing=south": { "model": "feast:block/dairy_machine/dairy_machine_model", "y":180 },
+		"facing=west": { "model": "feast:block/dairy_machine/dairy_machine_model", "y":270 },
+		"facing=east": { "model": "feast:block/dairy_machine/dairy_machine_model", "y":90 }
+	}
+}

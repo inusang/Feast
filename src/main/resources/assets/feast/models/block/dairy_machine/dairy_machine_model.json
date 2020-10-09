@@ -1,0 +1,12 @@
+{
+	"parent": "block/cube",
+	"textures": {
+		"particle": "feast:block/dairy_machine/dairy_machine_side",
+		"down": "feast:block/dairy_machine/dairy_machine_side",
+        "up": "feast:block/dairy_machine/dairy_machine_top",
+        "north": "feast:block/dairy_machine/dairy_machine_front",
+        "east": "feast:block/dairy_machine/dairy_machine_side",
+        "south": "feast:block/dairy_machine/dairy_machine_side",
+        "west": "feast:block/dairy_machine/dairy_machine_side"
+	}
+}
