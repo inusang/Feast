@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContainer> {
-	private static final ResourceLocation TEXTURE=new ResourceLocation(Feast.MODID+":textures/gui/container/milk_refine_machine_table.png");
+	private static final ResourceLocation TEXTURE=new ResourceLocation(Feast.MODID+":textures/gui/container/dairy_machine_table.png");
 	
 	public DairyMachineGuiContainer(DairyMachineContainer container, PlayerInventory pi, ITextComponent title) {
 		super(container,pi,title);
