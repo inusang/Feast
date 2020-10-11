@@ -36,6 +36,6 @@ public class CreamItem extends Item implements IProduceItem {
 	
 	@Override
 	public int progressCount() {
-		return 180*Constants.TICK_EACH_SECOND;
+		return 120*Constants.TICK_EACH_SECOND;
 	}
 }

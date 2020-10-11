@@ -36,11 +36,11 @@ public class CheeseItem extends Item implements IProduceItem {
 	
 	@Override
 	public int produceCount() {
-		return 1;
+		return 2;
 	}
 	
 	@Override
 	public int progressCount() {
-		return 240*Constants.TICK_EACH_SECOND;
+		return 180*Constants.TICK_EACH_SECOND;
 	}
 }

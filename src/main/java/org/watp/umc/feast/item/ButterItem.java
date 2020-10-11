@@ -36,6 +36,6 @@ public class ButterItem extends Item implements IProduceItem {
 	
 	@Override
 	public int progressCount() {
-		return 240*Constants.TICK_EACH_SECOND;
+		return 150*Constants.TICK_EACH_SECOND;
 	}
 }
