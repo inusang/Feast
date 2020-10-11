@@ -98,7 +98,8 @@ public class Feast
             
         }
     }
-    
+
+	@ObjectHolder(Feast.MODID)
 	public static class Items {
 	   public static final Item OVEN=null;
 	   public static final Item DAIRY_MACHINE=null;
