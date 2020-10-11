@@ -17,6 +17,6 @@ public class NetWorking {
 				()->VERSION,version->version.equals(VERSION),version->version.equals(VERSION));
 		INSTANCE.registerMessage(id++,PacketOvenOpenSync.class,PacketOvenOpenSync::toBytes,PacketOvenOpenSync::new,PacketOvenOpenSync::handle);
 		INSTANCE.registerMessage(id++,PacketOvenStatSync.class,PacketOvenStatSync::toBytes,PacketOvenStatSync::new,PacketOvenStatSync::handle);
-		INSTANCE.registerMessage(id++,PacketMRMStatSync.class,PacketMRMStatSync::toBytes,PacketMRMStatSync::new,PacketMRMStatSync::handle);
+		INSTANCE.registerMessage(id++, PacketDMStatSync.class, PacketDMStatSync::toBytes, PacketDMStatSync::new, PacketDMStatSync::handle);
 	}
 }

@@ -1,7 +1,7 @@
 package org.watp.umc.feast.block;
 
 import org.watp.umc.feast.network.NetWorking;
-import org.watp.umc.feast.network.PacketMRMStatSync;
+import org.watp.umc.feast.network.PacketDMStatSync;
 import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 
 import net.minecraft.block.Block;
@@ -53,7 +53,7 @@ public class DairyMachineBlock extends Block {
 			final DairyMachineTileEntity te=(DairyMachineTileEntity) world.getTileEntity(pos);
 			if (te!=null) {
 				NetWorking.INSTANCE.send(PacketDistributor.SERVER.noArg()
-						,new PacketMRMStatSync(pos,te.getProgressVisible()));
+						,new PacketDMStatSync(pos,te.getProgressVisible()));
 				te.openGUI((ServerPlayerEntity)player);
 			}
 			return ActionResultType.CONSUME;

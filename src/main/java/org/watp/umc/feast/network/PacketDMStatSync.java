@@ -9,16 +9,16 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-public class PacketMRMStatSync {
+public class PacketDMStatSync {
 	private final BlockPos pos;
 	private final int progressVisible;
 	
-	public PacketMRMStatSync(PacketBuffer buf) {
+	public PacketDMStatSync(PacketBuffer buf) {
 		this.pos=buf.readBlockPos();
 		this.progressVisible=buf.readInt();
 	}
 	
-	public PacketMRMStatSync(BlockPos pos,int progressVisible) {
+	public PacketDMStatSync(BlockPos pos, int progressVisible) {
 		this.pos=pos;
 		this.progressVisible=progressVisible;
 	}
