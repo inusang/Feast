@@ -1,3 +1,32 @@
+Build: 1.16.3-34.1.15 - Fri Oct 09 13:58:36 GMT 2020
+	David Quintana:
+		Fixed conditional advancement loading when using the "advancements" array.
+		Added automatic generation of conditional advancements from the criteria in the conditional recipe entries.
+		Added advancement name calculation from the recipe ID.
+
+=========
+Build: 1.16.3-34.1.14 - Thu Oct 08 21:08:45 GMT 2020
+	32142731+Flanks255:
+		Additions to the mdk build.gradle to accommodate datagens. (#7398)
+
+=========
+Build: 1.16.3-34.1.13 - Thu Oct 08 21:02:59 GMT 2020
+	Colby Prince:
+		Added Basic Class-Level SAS Capability to checkSAS, added Vector4f to SAS (#7385)
+
+=========
+Build: 1.16.3-34.1.12 - Wed Oct 07 20:04:11 GMT 2020
+	richard:
+		Add hooks to allow modification of structures spawn lists (#7344)
+
+=========
+Build: 1.16.3-34.1.11 - Tue Oct 06 19:38:36 GMT 2020
+	richard:
+		Add back patches to Screen allowing for item tooltips to be auto wrapped again (#7378)
+		
+		Only deals with the methods receiving an ItemStack or ITextComponent(s), the methods that take IReorderingProcessor(s) are left alone.
+
+=========
 Build: 1.16.3-34.1.10 - Mon Oct 05 14:34:56 GMT 2020
 	adam:
 		Bump mixin version to 0.8.2
