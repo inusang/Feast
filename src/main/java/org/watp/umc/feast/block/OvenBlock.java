@@ -36,7 +36,7 @@ public class OvenBlock extends Block {
 	
 	public OvenBlock() {
 		super(Properties.create(Material.IRON).hardnessAndResistance(4F).harvestTool(ToolType.PICKAXE).harvestLevel(1).
-				func_235838_a_(bs->0));		//func_235838_a_(ToIntFunction<BlockState>) is the function to control the lightValue
+				func_235838_a_(bs->0));		//control the lightValue
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(OVEN_STAT,0));
 	}
 	
