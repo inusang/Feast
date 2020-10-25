@@ -1,5 +1,11 @@
 package org.watp.umc.feast.block;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.Explosion;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.network.PacketDMStatSync;
 import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
@@ -27,14 +33,16 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class DairyMachineBlock extends Block {
+import javax.annotation.Nullable;
+
+public class DairyMachineBlock extends DestroiedGuiAutoCloseBlock {
 	protected static final DirectionProperty FACING=HorizontalBlock.HORIZONTAL_FACING;
 	
 	public DairyMachineBlock() {
-		super(Properties.create(Material.IRON).hardnessAndResistance(3f).harvestTool(ToolType.PICKAXE).harvestLevel(1));
+		super(Properties.create(Material.IRON).hardnessAndResistance(3f).harvestTool(ToolType.PICKAXE).harvestLevel(1).notSolid());
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 	}
-	
+
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
@@ -64,17 +72,17 @@ public class DairyMachineBlock extends Block {
 	}
 	
 	@Override
-	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock()!=newState.getBlock()) {
-			TileEntity te=world.getTileEntity(pos);
-			IItemHandler inven=te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY,null).orElse(null);
-			InventoryHelper.spawnItemStack(world,pos.getX(),pos.getY(),pos.getZ(),inven.getStackInSlot(0));
-		}
-		if (state.hasTileEntity() && (state.getBlock() != newState.getBlock() || !newState.hasTileEntity())) {
-	         world.removeTileEntity(pos);
-	    }
+	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack itemStack) {
+		super.onBlockPlacedBy(world, pos, state, entity, itemStack);
+		onDestroy(world, pos);
 	}
-	
+
+	@Override
+	public void onExplosionDestroy(World world, BlockPos pos, Explosion explosion) {
+		super.onExplosionDestroy(world, pos, explosion);
+		onDestroy(world, pos);
+	}
+
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new DairyMachineTileEntity();

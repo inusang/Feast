@@ -1,5 +1,8 @@
 package org.watp.umc.feast.block;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.network.PacketOvenStatSync;
 import org.watp.umc.feast.tileentity.OvenTileEntity;
@@ -30,12 +33,14 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class OvenBlock extends Block {
+import javax.annotation.Nullable;
+
+public class OvenBlock extends DestroiedGuiAutoCloseBlock {
 	protected static final DirectionProperty FACING=HorizontalBlock.HORIZONTAL_FACING;
 	public static final IntegerProperty OVEN_STAT=IntegerProperty.create("oven_stat",0,3);			//0:off 1:standby 2:on 3:danger
 	
 	public OvenBlock() {
-		super(Properties.create(Material.IRON).hardnessAndResistance(4F).harvestTool(ToolType.PICKAXE).harvestLevel(1).
+		super(Properties.create(Material.IRON).hardnessAndResistance(3f,2f).harvestTool(ToolType.PICKAXE).harvestLevel(1).
 				func_235838_a_(bs->0));		//control the lightValue
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(OVEN_STAT,0));
 	}
@@ -48,7 +53,7 @@ public class OvenBlock extends Block {
 	@Override
 	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
 		int ovenStat=state.func_235903_d_(OVEN_STAT).orElse(0);
-		if (ovenStat==1) return 10;
+		if (ovenStat==1) return 5;
 		else if (ovenStat==2) return 14;
 		else if (ovenStat==3) return 15;
 		else return 0;
@@ -81,29 +86,19 @@ public class OvenBlock extends Block {
 			return ActionResultType.SUCCESS;
 		}
 	}
-	
+
 	@Override
-	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock()!=newState.getBlock()) {
-			TileEntity te=world.getTileEntity(pos);
-			IItemHandler inven=te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
-			for (int i=0;i<inven.getSlots();i++) {
-				InventoryHelper.spawnItemStack(world,pos.getX(),pos.getY(),pos.getZ(),inven.getStackInSlot(i));
-			}
-		}
-		if (state.hasTileEntity() && (state.getBlock() != newState.getBlock() || !newState.hasTileEntity())) {
-	         world.removeTileEntity(pos);
-	    }
+	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack itemStack) {
+		super.onBlockPlacedBy(world, pos, state, entity, itemStack);
+		onDestroy(world, pos);
 	}
-	
+
 	@Override
 	public void onExplosionDestroy(World world, BlockPos pos, Explosion explosion) {
 		super.onExplosionDestroy(world, pos, explosion);
-		if (world.getTileEntity(pos)!=null) {
-			world.removeTileEntity(pos);
-		}
+		onDestroy(world, pos);
 	}
-	
+
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		return new OvenTileEntity();
