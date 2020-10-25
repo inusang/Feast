@@ -1,11 +1,8 @@
 package org.watp.umc.feast.block;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IWorld;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.network.PacketOvenStatSync;
 import org.watp.umc.feast.tileentity.OvenTileEntity;
