@@ -24,7 +24,8 @@ public abstract class DestroiedGuiAutoCloseBlock extends Block {
             world.removeTileEntity(pos);
         }
         if (world.isRemote()) {
-            Minecraft.getInstance().currentScreen=null;
+            //Minecraft.getInstance().currentScreen=null;
+            Minecraft.getInstance().displayGuiScreen(null);
         }
     }
 }
