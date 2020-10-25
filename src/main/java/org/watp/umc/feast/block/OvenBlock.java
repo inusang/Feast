@@ -1,7 +1,5 @@
 package org.watp.umc.feast.block;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.IWorld;
 import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.network.PacketOvenStatSync;
@@ -29,8 +27,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.PacketDistributor;
-
-import javax.annotation.Nullable;
 
 public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 	protected static final DirectionProperty FACING=HorizontalBlock.HORIZONTAL_FACING;
