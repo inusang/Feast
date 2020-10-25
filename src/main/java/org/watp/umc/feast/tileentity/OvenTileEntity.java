@@ -176,7 +176,7 @@ public class OvenTileEntity extends TileEntity implements ICustomContainer,ITick
 						materialSlot.extractItem(i,materialSlot.getStackInSlot(i).getCount(),false);
 					}
 					productionSlot.extractItem(0,productionSlot.getStackInSlot(0).getCount(),false);
-					this.world.createExplosion(null,this.getPos().getX(),this.getPos().getY(),this.getPos().getZ(),3,Explosion.Mode.DESTROY);
+					this.world.createExplosion(null,this.getPos().getX(),this.getPos().getY(),this.getPos().getZ(),2,Explosion.Mode.DESTROY);
 					return;
 				}
 				remainingEnergy=remainingEnergy<2?0:remainingEnergy-2;

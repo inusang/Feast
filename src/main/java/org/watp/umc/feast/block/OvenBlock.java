@@ -84,12 +84,6 @@ public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack itemStack) {
-		super.onBlockPlacedBy(world, pos, state, entity, itemStack);
-		onDestroy(world, pos);
-	}
-
-	@Override
 	public void onBlockExploded(BlockState state, World world, BlockPos pos, Explosion explosion) {
 		super.onBlockExploded(state, world, pos ,explosion);
 		onDestroy(world, pos);
