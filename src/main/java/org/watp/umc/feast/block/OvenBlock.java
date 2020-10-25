@@ -64,19 +64,21 @@ public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player,
 			Hand hand, BlockRayTraceResult hit) {
-		if (!world.isRemote) {
-			if (Math.sqrt(player.getDistanceSq(pos.getX(),pos.getY(),pos.getZ()))>4 ||
-					player.getHorizontalFacing().getOpposite()!=state.get(FACING)) {
-				return ActionResultType.PASS;
+		if (!world.isRemote()) {
+			if (!(Math.sqrt(player.getDistanceSq(pos.getX(),pos.getY(),pos.getZ()))>4 ||
+					player.getHorizontalFacing().getOpposite()!=state.get(FACING))) {
+				final OvenTileEntity te=(OvenTileEntity) world.getTileEntity(pos);
+				if (te!=null) {
+					NetWorking.INSTANCE.send(PacketDistributor.SERVER.noArg()
+							,new PacketOvenStatSync(pos,te.getIntVisibleValue(VisibleIntValueType.PROGRESS),te.getIntVisibleValue(VisibleIntValueType.TEMPERATURE),
+									te.getIntVisibleValue(VisibleIntValueType.REMAINING_ENERGY),te.getIntVisibleValue(VisibleIntValueType.REMAINING_COOLING),te.getOpen()));
+					te.openGUI((ServerPlayerEntity)player);
+				}
+				return ActionResultType.CONSUME;
 			}
-			final OvenTileEntity te=(OvenTileEntity) world.getTileEntity(pos);
-			if (te!=null) {
-				NetWorking.INSTANCE.send(PacketDistributor.SERVER.noArg()
-						,new PacketOvenStatSync(pos,te.getIntVisibleValue(VisibleIntValueType.PROGRESS),te.getIntVisibleValue(VisibleIntValueType.TEMPERATURE),
-								te.getIntVisibleValue(VisibleIntValueType.REMAINING_ENERGY),te.getIntVisibleValue(VisibleIntValueType.REMAINING_COOLING),te.getOpen()));
-				te.openGUI((ServerPlayerEntity)player);
+			else {
+				return ActionResultType.CONSUME;
 			}
-			return ActionResultType.CONSUME;
 		}
 		else {
 			return ActionResultType.SUCCESS;
