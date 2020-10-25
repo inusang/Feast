@@ -1,8 +1,12 @@
 package org.watp.umc.feast.block;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IWorld;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.network.PacketDMStatSync;
 import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
@@ -64,7 +68,7 @@ public class DairyMachineBlock extends DestroyedGuiAutoCloseBlock {
 			return ActionResultType.SUCCESS;
 		}
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack itemStack) {
 		super.onBlockPlacedBy(world, pos, state, entity, itemStack);
@@ -72,9 +76,15 @@ public class DairyMachineBlock extends DestroyedGuiAutoCloseBlock {
 	}
 
 	@Override
-	public void onExplosionDestroy(World world, BlockPos pos, Explosion explosion) {
-		super.onExplosionDestroy(world, pos, explosion);
+	public void onBlockExploded(BlockState state, World world, BlockPos pos, Explosion explosion) {
+		super.onBlockExploded(state, world, pos ,explosion);
 		onDestroy(world, pos);
+	}
+
+	@Override
+	public void onPlayerDestroy(IWorld world, BlockPos pos, BlockState state) {
+		super.onPlayerDestroy(world, pos, state);
+		onDestroy((World) world, pos);
 	}
 
 	@Override
