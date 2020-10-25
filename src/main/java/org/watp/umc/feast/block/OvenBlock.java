@@ -31,7 +31,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
-public class OvenBlock extends DestroiedGuiAutoCloseBlock {
+public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 	protected static final DirectionProperty FACING=HorizontalBlock.HORIZONTAL_FACING;
 	public static final IntegerProperty OVEN_STAT=IntegerProperty.create("oven_stat",0,3);			//0:off 1:standby 2:on 3:danger
 	

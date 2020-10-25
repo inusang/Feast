@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public abstract class DestroiedGuiAutoCloseBlock extends Block {
-    public DestroiedGuiAutoCloseBlock(Properties properties) {
+public abstract class DestroyedGuiAutoCloseBlock extends Block {
+    public DestroyedGuiAutoCloseBlock(Properties properties) {
         super(properties);
     }
 

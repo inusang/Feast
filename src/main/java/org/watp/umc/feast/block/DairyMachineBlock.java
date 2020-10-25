@@ -29,7 +29,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
-public class DairyMachineBlock extends DestroiedGuiAutoCloseBlock {
+public class DairyMachineBlock extends DestroyedGuiAutoCloseBlock {
 	protected static final DirectionProperty FACING=HorizontalBlock.HORIZONTAL_FACING;
 	
 	public DairyMachineBlock() {
