@@ -33,7 +33,7 @@ public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 	public static final IntegerProperty OVEN_STAT=IntegerProperty.create("oven_stat",0,3);			//0:off 1:standby 2:on 3:danger
 	
 	public OvenBlock() {
-		super(Properties.create(Material.IRON).hardnessAndResistance(3f,2f).harvestTool(ToolType.PICKAXE).harvestLevel(1).
+		super(Properties.create(Material.IRON).hardnessAndResistance(4f).harvestTool(ToolType.PICKAXE).harvestLevel(1).
 				func_235838_a_(bs->0));		//control the lightValue
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(OVEN_STAT,0));
 	}
@@ -46,7 +46,7 @@ public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 	@Override
 	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
 		int ovenStat=state.func_235903_d_(OVEN_STAT).orElse(0);
-		if (ovenStat==1) return 5;
+		if (ovenStat==1) return 9;
 		else if (ovenStat==2) return 14;
 		else if (ovenStat==3) return 15;
 		else return 0;
