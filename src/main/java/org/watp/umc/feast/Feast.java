@@ -66,9 +66,7 @@ public class Feast
     
     private void doClientStuff(final FMLClientSetupEvent event) {
     	// Enable dairy machine block perform correctly
-    	event.enqueueWork(()-> {
-			RenderTypeLookup.setRenderLayer(Blocks.DAIRY_MACHINE, RenderType.getCutoutMipped());
-		});
+    	event.enqueueWork(()-> RenderTypeLookup.setRenderLayer(Blocks.DAIRY_MACHINE, RenderType.getCutoutMipped()));
     }
 
     /*
