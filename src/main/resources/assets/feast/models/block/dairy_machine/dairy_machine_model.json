@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "block/glass",
+		"1": "feast:block/dairy_machine/glass",
 		"2": "feast:block/dairy_machine/dairy_side_front",
 		"3": "feast:block/dairy_machine/dairy_machine_bottom",
 		"4": "feast:block/dairy_machine/dairy_machine_studdle1",
