@@ -134,8 +134,8 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	 * read(BlockState,CompoundNBT)</br>
 	 */
 	@Override
-	public void func_230337_a_(BlockState bs, CompoundNBT compound) {
-		super.func_230337_a_(bs,compound);
+	public void read(BlockState bs, CompoundNBT compound) {
+		super.read(bs,compound);
 		DairyMachineMaterialSlot.deserializeNBT(compound.getCompound("feast:mrm.material"));
 		productionSlot.deserializeNBT(compound.getCompound("feast:mrm.production"));
 		this.progress=compound.getInt("feast:mrm.progress");

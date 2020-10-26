@@ -258,8 +258,8 @@ public class OvenTileEntity extends TileEntity implements ICustomContainer,ITick
 	 * func_name: read(BlockState,CompoundNBT)</br>
 	 */
 	@Override
-	public void func_230337_a_(BlockState bs, CompoundNBT compound) {
-		super.func_230337_a_(bs,compound);
+	public void read(BlockState bs, CompoundNBT compound) {
+		super.read(bs,compound);
 		this.materialSlot.deserializeNBT(compound.getCompound("feast:oven.material"));
 		this.fuelSlot.deserializeNBT(compound.getCompound("feast:oven.fuel"));
 		this.freezeSlot.deserializeNBT(compound.getCompound("feast:oven.freeze"));

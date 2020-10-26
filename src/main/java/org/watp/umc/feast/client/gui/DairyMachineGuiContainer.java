@@ -17,14 +17,11 @@ public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContai
 		super(container,pi,title);
 	}
 	
-	/**
-	 * drawScreen(MatrixStack,int,int,float)</br>
-	 */
 	@Override
-	public void func_230430_a_(MatrixStack mStack, int mouseX, int mouseY, float partial) {
-		this.func_231160_c_();		//renderBackground() ???
-		super.func_230430_a_(mStack, mouseX, mouseY, partial);
-		this.func_230459_a_(mStack, mouseX, mouseY);		//renderHoveredToolTip(MatrixStack,int,int)
+	public void render(MatrixStack mStack, int mouseX, int mouseY, float partial) {
+		this.init();
+		super.render(mStack, mouseX, mouseY, partial);
+		this.renderHoveredTooltip(mStack, mouseX, mouseY);
 	}
 	
 	/**
@@ -34,14 +31,14 @@ public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContai
 	 * func_238474_b_: AbstractGui.blit</br>
 	 */
 	@Override
-	protected void func_230450_a_(MatrixStack mStack, float partial, int mouseX, int moustY) {
+	protected void drawGuiContainerBackgroundLayer(MatrixStack mStack, float partial, int mouseX, int moustY) {
 		//GlStateManager.color4f(1.0f,1.0f,1.0f,1.0f);
 		this.getMinecraft().getTextureManager().bindTexture(TEXTURE);
-		int left=(this.field_230708_k_-this.xSize)/2;	//(width-xSize)/2
-		int top=(this.field_230709_l_-this.ySize)/2;	//(height-ySize)/2
-		this.func_238474_b_(mStack, left, top, 0, 0, this.xSize, this.ySize);	//call AbstractGui.blit
+		int left=(this.width-this.xSize)/2;	//(width-xSize)/2
+		int top=(this.height-this.ySize)/2;	//(height-ySize)/2
+		this.blit(mStack, left, top, 0, 0, this.xSize, this.ySize);	//call AbstractGui.blit
 		int barHeight=15;
 		int barWidth=this.container.getTileEntity().getProgressVisible();
-		this.func_238474_b_(mStack,left+66,top+33,0,166,barWidth,barHeight);
+		this.blit(mStack,left+66,top+33,0,166,barWidth,barHeight);
 	}
 }
