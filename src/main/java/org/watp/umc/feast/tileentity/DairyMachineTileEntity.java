@@ -33,7 +33,7 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	private ItemStackHandler DairyMachineMaterialSlot;
 	private ItemStackHandler productionSlot;
 	
-	private LazyOptional<IItemHandler> DairyMachineMaterialSlotHolder=LazyOptional.of(()->DairyMachineMaterialSlot);
+	private LazyOptional<IItemHandler> dairyMachineMaterialSlotHolder=LazyOptional.of(()->DairyMachineMaterialSlot);
 	private LazyOptional<IItemHandler> productionSlotHolder=LazyOptional.of(()->productionSlot);
 	private LazyOptional<IItemHandler> allSlotHolder=LazyOptional.of(()->new CombinedInvWrapper(DairyMachineMaterialSlot,productionSlot));
 	
@@ -63,7 +63,7 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 		if (cap==itemHandlerCap) {
 			this.markDirty();
 			if (side==Direction.UP) {
-				return DairyMachineMaterialSlotHolder.cast();
+				return dairyMachineMaterialSlotHolder.cast();
 			}
 			else if (side==Direction.DOWN) {
 				return productionSlotHolder.cast();
@@ -163,7 +163,7 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	@Override
 	public void remove() {
 		super.remove();
-		DairyMachineMaterialSlotHolder.invalidate();
+		dairyMachineMaterialSlotHolder.invalidate();
 		productionSlotHolder.invalidate();
 		allSlotHolder.invalidate();
 	}
