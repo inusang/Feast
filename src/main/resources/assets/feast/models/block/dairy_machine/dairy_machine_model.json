@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "dairy_machine/dairy_side_front",
-		"5": "dairy_machine/diary_machine",
-		"particle": "dairy_machine/diary_machine"
+		"2": "feast:block/dairy_machine/dairy_side_front",
+		"5": "feast:block/dairy_machine/diary_machine",
+		"particle": "feast:block/dairy_machine/diary_machine"
 	},
 	"elements": [
 		{
