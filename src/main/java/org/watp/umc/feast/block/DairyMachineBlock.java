@@ -1,5 +1,6 @@
 package org.watp.umc.feast.block;
 
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -35,7 +36,7 @@ public class DairyMachineBlock extends DestroyedGuiAutoCloseBlock {
 	protected static final DirectionProperty FACING=HorizontalBlock.HORIZONTAL_FACING;
 
 	public DairyMachineBlock() {
-		super(Properties.create(Material.IRON).hardnessAndResistance(3f).harvestTool(ToolType.PICKAXE).harvestLevel(1).notSolid());
+		super(Properties.create(Material.IRON).hardnessAndResistance(15f,4f).harvestTool(ToolType.PICKAXE).harvestLevel(1).notSolid());
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 	}
 
@@ -48,6 +49,11 @@ public class DairyMachineBlock extends DestroyedGuiAutoCloseBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+	}
+
+	@Override
+	public BlockRenderType getRenderType(BlockState p_149645_1_) {
+		return BlockRenderType.MODEL;
 	}
 
 	public VoxelShape func_230322_a_(BlockState p_230322_1_, IBlockReader p_230322_2_, BlockPos p_230322_3_, ISelectionContext p_230322_4_) {

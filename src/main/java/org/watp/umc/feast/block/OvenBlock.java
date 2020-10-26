@@ -33,7 +33,7 @@ public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 	public static final IntegerProperty OVEN_STAT=IntegerProperty.create("oven_stat",0,3);			//0:off 1:standby 2:on 3:danger
 	
 	public OvenBlock() {
-		super(Properties.create(Material.IRON).hardnessAndResistance(4f).harvestTool(ToolType.PICKAXE).harvestLevel(1).
+		super(Properties.create(Material.IRON).hardnessAndResistance(6f,4f).harvestTool(ToolType.PICKAXE).harvestLevel(1).
 				func_235838_a_(bs->0));		//control the lightValue
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(OVEN_STAT,0));
 	}
