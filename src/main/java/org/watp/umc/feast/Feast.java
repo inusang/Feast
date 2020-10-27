@@ -6,6 +6,8 @@ import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -63,7 +65,8 @@ public class Feast
     	NetWorking.registerMessage();
     	//proxy.init();
     }
-    
+
+    @OnlyIn(Dist.CLIENT)
     private void doClientStuff(final FMLClientSetupEvent event) {
     	// Enable dairy machine block perform correctly
     	event.enqueueWork(()-> RenderTypeLookup.setRenderLayer(Blocks.DAIRY_MACHINE, RenderType.getCutoutMipped()));
