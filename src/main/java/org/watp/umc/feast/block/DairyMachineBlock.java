@@ -1,9 +1,8 @@
 package org.watp.umc.feast.block;
 
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.util.*;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,9 +21,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
@@ -32,18 +28,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.PacketDistributor;
 
+import java.util.Random;
+
 public class DairyMachineBlock extends DestroyedGuiAutoCloseBlock {
 	protected static final DirectionProperty FACING=HorizontalBlock.HORIZONTAL_FACING;
+	public static final BooleanProperty WORKING=BooleanProperty.create("working");
 
 	public DairyMachineBlock() {
 		super(Properties.create(Material.IRON).hardnessAndResistance(15f,4f).harvestTool(ToolType.PICKAXE).harvestLevel(1).notSolid());
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WORKING,false));
 	}
 
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
-		builder.add(FACING);
+		builder.add(FACING,WORKING);
 	}
 
 	@Override
@@ -51,22 +50,20 @@ public class DairyMachineBlock extends DestroyedGuiAutoCloseBlock {
 		return getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
 
-	@Override
-	public BlockRenderType getRenderType(BlockState p_149645_1_) {
-		return BlockRenderType.MODEL;
-	}
-
-	public VoxelShape func_230322_a_(BlockState p_230322_1_, IBlockReader p_230322_2_, BlockPos p_230322_3_, ISelectionContext p_230322_4_) {
-		return VoxelShapes.empty();
+	public boolean propagatesSkylightDown(BlockState state, IBlockReader world, BlockPos pos) {
+		return true;
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public float getAmbientOcclusionLightValue(BlockState p_220080_1_, IBlockReader p_220080_2_, BlockPos p_220080_3_) {
-		return 1.0F;
-	}
-
-	public boolean propagatesSkylightDown(BlockState p_200123_1_, IBlockReader p_200123_2_, BlockPos p_200123_3_) {
-		return true;
+	@Override
+	public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {
+		if (state.get(WORKING) && rand.nextDouble() > 0.5d) {
+			double d0 = (double)pos.getX() + 0.5;
+			double d1 = (double)pos.getY() + 1;
+			double d2 = (double)pos.getZ() + 0.5;
+			double d3 = rand.nextDouble() * 6.0d / 16.0d;
+			world.addParticle(ParticleTypes.BUBBLE_COLUMN_UP, d0 , d1 + d3 , d2 , 0.0d, 0.0d, 0.0d);
+		}
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package org.watp.umc.feast.tileentity;
 
 import java.util.Map;
 
+import org.watp.umc.feast.block.DairyMachineBlock;
 import org.watp.umc.feast.inventory.DairyMachineContainer;
 import org.watp.umc.feast.item.IProduceItem;
 import org.watp.umc.feast.recipe.DairyMachineRecipe;
@@ -80,43 +81,48 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 		if (world.isRemote()) {
 			return;
 		}
-		else {
-			if (progress==0 && productionTarget==null) {
-				Item material=DairyMachineMaterialSlot.getStackInSlot(0).getItem();
-				Item production= DairyMachineRecipe.match(material);
-				if (production!=null) {
-					IProduceItem produce=(IProduceItem) production;
-					int consumeCount=0;
-					for (Map.Entry<Item,Integer> entry : produce.consume().entrySet()) {
-						consumeCount=entry.getValue();
+		if (progress==0 && productionTarget==null) {
+			Item material=DairyMachineMaterialSlot.getStackInSlot(0).getItem();
+			Item production= DairyMachineRecipe.match(material);
+			if (production!=null) {
+				IProduceItem produce=(IProduceItem) production;
+				int consumeCount=0;
+				for (Map.Entry<Item,Integer> entry : produce.consume().entrySet()) {
+					consumeCount=entry.getValue();
+				}
+				boolean hasMax=produce.produceCount()+productionSlot.getStackInSlot(0).getCount()>productionSlot.getSlotLimit(0);
+				boolean sameProduction=production==productionSlot.getStackInSlot(0).getItem() || productionSlot.getStackInSlot(0).getItem()==Items.AIR;
+				if (DairyMachineMaterialSlot.getStackInSlot(0).getCount()>=consumeCount && consumeCount!=0 && !hasMax && sameProduction) {
+					DairyMachineMaterialSlot.extractItem(0,consumeCount,false);
+					if (material==Items.MILK_BUCKET) {
+						ItemStack bucket=new ItemStack(Items.BUCKET,1);
+						DairyMachineMaterialSlot.insertItem(0,bucket,false);
 					}
-					boolean hasMax=produce.produceCount()+productionSlot.getStackInSlot(0).getCount()>productionSlot.getSlotLimit(0);
-					boolean sameProduction=production==productionSlot.getStackInSlot(0).getItem() || productionSlot.getStackInSlot(0).getItem()==Items.AIR;
-					if (DairyMachineMaterialSlot.getStackInSlot(0).getCount()>=consumeCount && consumeCount!=0 && !hasMax && sameProduction) {
-						DairyMachineMaterialSlot.extractItem(0,consumeCount,false);
-						if (material==Items.MILK_BUCKET) {
-							ItemStack bucket=new ItemStack(Items.BUCKET,1);
-							DairyMachineMaterialSlot.insertItem(0,bucket,false);
-						}
-						this.productionTarget=production;
-						progressVisible=Math.round(++progress/(float)produce.progressCount()*44);
-						this.markDirty();
-					}
+					this.productionTarget=production;
+					progressVisible=Math.round(++progress/(float)produce.progressCount()*44);
+					this.world.setBlockState(this.pos, this.world.getBlockState(pos).with(DairyMachineBlock.WORKING, true));
+					this.markDirty();
+				}
+				else {
+					this.world.setBlockState(this.pos, this.world.getBlockState(pos).with(DairyMachineBlock.WORKING, false));
 				}
 			}
 			else {
-				IProduceItem produce=(IProduceItem) this.productionTarget;
-				if (progress<produce.progressCount()) {
-					progressVisible=Math.round(++progress/(float)produce.progressCount()*44);
-				}
-				else {
-					ItemStack production=new ItemStack(productionTarget,produce.produceCount());
-					productionSlot.insertItem(0,production,false);
-					progressVisible=progress=0;
-					productionTarget=null;
-				}
-				this.markDirty();
+				this.world.setBlockState(this.pos, this.world.getBlockState(pos).with(DairyMachineBlock.WORKING, false));
 			}
+		}
+		else {
+			IProduceItem produce=(IProduceItem) this.productionTarget;
+			if (progress<produce.progressCount()) {
+				progressVisible=Math.round(++progress/(float)produce.progressCount()*44);
+			}
+			else {
+				ItemStack production=new ItemStack(productionTarget,produce.produceCount());
+				productionSlot.insertItem(0,production,false);
+				progressVisible=progress=0;
+				productionTarget=null;
+			}
+			this.markDirty();
 		}
 	}
 	
