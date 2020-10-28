@@ -24,12 +24,6 @@ public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContai
 		this.renderHoveredTooltip(mStack, mouseX, mouseY);
 	}
 	
-	/**
-	 * drawGuiContainerBackgroundLayer(MatrixStack,float,int,int)</br>
-	 * field_230708_k_: width(int)</br>
-	 * field_230709_l_: height(int)</br>
-	 * func_238474_b_: AbstractGui.blit</br>
-	 */
 	@Override
 	protected void drawGuiContainerBackgroundLayer(MatrixStack mStack, float partial, int mouseX, int moustY) {
 		//GlStateManager.color4f(1.0f,1.0f,1.0f,1.0f);
