@@ -2,6 +2,7 @@ package org.watp.umc.feast.block;
 
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.util.*;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IWorld;
@@ -33,16 +34,17 @@ import java.util.Random;
 public class DairyMachineBlock extends DestroyedGuiAutoCloseBlock {
 	protected static final DirectionProperty FACING=HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty WORKING=BooleanProperty.create("working");
+	public static final EnumProperty WORKMODE=EnumProperty.create("work_mode", DairyMachineTileEntity.WorkMode.class);
 
 	public DairyMachineBlock() {
 		super(Properties.create(Material.IRON).hardnessAndResistance(15f,4f).harvestTool(ToolType.PICKAXE).harvestLevel(1).notSolid());
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WORKING,false));
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WORKING,false).with(WORKMODE, DairyMachineTileEntity.WorkMode.NONE));
 	}
 
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
-		builder.add(FACING,WORKING);
+		builder.add(FACING,WORKING,WORKMODE);
 	}
 
 	@Override

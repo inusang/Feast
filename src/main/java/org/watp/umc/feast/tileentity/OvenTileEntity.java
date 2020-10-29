@@ -40,7 +40,7 @@ public class OvenTileEntity extends TileEntity implements ICustomContainer,ITick
 	private int progress;
 	private int temperature;	//>=6400 boom!
 	
-	public static enum VisibleIntValueType {
+	public enum VisibleIntValueType {
 		REMAINING_ENERGY,
 		REMAINING_COOLING,
 		PROGRESS,

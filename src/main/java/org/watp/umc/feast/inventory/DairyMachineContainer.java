@@ -1,5 +1,6 @@
 package org.watp.umc.feast.inventory;
 
+import net.minecraftforge.items.ItemStackHandler;
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.inventory.slot.ICheckedSlot;
 import org.watp.umc.feast.inventory.slot.ProductionSlot;
@@ -20,6 +21,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+
+import javax.annotation.Nonnull;
 
 public class DairyMachineContainer extends CommonInteractContainer {
 	private DairyMachineTileEntity te;
@@ -42,12 +45,18 @@ public class DairyMachineContainer extends CommonInteractContainer {
 	}
 	
 	@Override
-	protected <T extends TileEntity> void bindOtherSlots(final T te) {
+	protected <T extends TileEntity> void bindOtherSlots(T te) {
 		Capability<IItemHandler> itemHandlerCap=CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 		IItemHandler materialItemStack=te.getCapability(itemHandlerCap,Direction.UP).orElse(null);
-		this.addSlot(new MRMMaterialSlot(materialItemStack,0,39,33));
+		this.addSlot(new MRMMaterialSlot(materialItemStack,0,39,18));
 		IItemHandler productionItemStack=te.getCapability(itemHandlerCap,Direction.DOWN).orElse(null);
-		this.addSlot(new ProductionSlot(productionItemStack,0,121,33));
+		this.addSlot(new ProductionSlot(productionItemStack,0,121,18));
+		//bind extraCollectionSlot
+		DairyMachineTileEntity dte=(DairyMachineTileEntity) te;
+		IItemHandler collectionItemStack=(IItemHandler) dte.getCollectionSlotHolder().orElse(null);
+		for (int i=0; i<5; i++) {
+			this.addSlot(new MRMCollectionSlot(collectionItemStack, i, 44+i*18, 57));
+		}
 	}
 	
 	@Override
@@ -60,7 +69,7 @@ public class DairyMachineContainer extends CommonInteractContainer {
 			
 			@Override
 			public int get() {
-				return te.getProgressVisible()  & 0xffff;
+				return te.getProgressVisible() & 0xffff;
 			}
 		});
 	}
@@ -78,6 +87,22 @@ public class DairyMachineContainer extends CommonInteractContainer {
 		@Override
 		public boolean check(Item item) {
 			return item==Items.MILK_BUCKET || item==Feast.Items.CREAM || item==Feast.Items.BUTTER;
+		}
+	}
+
+	private class MRMCollectionSlot extends SlotItemHandler implements ICheckedSlot {
+		public MRMCollectionSlot(IItemHandler itemHandler, int index, int xPos, int yPos) {
+			super(itemHandler, index, xPos, yPos);
+		}
+
+		@Override
+		public boolean isItemValid(@Nonnull ItemStack stack) {
+			return super.isItemValid(stack) && check(stack.getItem());
+		}
+
+		@Override
+		public boolean check(Item item) {
+			return false;
 		}
 	}
 }

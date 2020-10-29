@@ -2,6 +2,8 @@ package org.watp.umc.feast.tileentity;
 
 import java.util.Map;
 
+import net.minecraft.util.IStringSerializable;
+import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.block.DairyMachineBlock;
 import org.watp.umc.feast.inventory.DairyMachineContainer;
 import org.watp.umc.feast.item.IProduceItem;
@@ -30,24 +32,56 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
+import javax.annotation.Nonnull;
+import javax.swing.plaf.basic.BasicButtonUI;
+
 public class DairyMachineTileEntity extends TileEntity implements ICustomContainer,ITickableTileEntity {
-	private ItemStackHandler DairyMachineMaterialSlot;
+	private ItemStackHandler dairyMachineMaterialSlot;
 	private ItemStackHandler productionSlot;
+	private ItemStackHandler collectionSlot;
 	
-	private LazyOptional<IItemHandler> dairyMachineMaterialSlotHolder=LazyOptional.of(()->DairyMachineMaterialSlot);
+	private LazyOptional<IItemHandler> dairyMachineMaterialSlotHolder=LazyOptional.of(()->dairyMachineMaterialSlot);
 	private LazyOptional<IItemHandler> productionSlotHolder=LazyOptional.of(()->productionSlot);
-	private LazyOptional<IItemHandler> allSlotHolder=LazyOptional.of(()->new CombinedInvWrapper(DairyMachineMaterialSlot,productionSlot));
-	
+	private LazyOptional<IItemHandler> collectionSlotHolder=LazyOptional.of(()->collectionSlot);
+	private LazyOptional<IItemHandler> allSlotHolder=LazyOptional.of(()->new CombinedInvWrapper(dairyMachineMaterialSlot,productionSlot));
+
 	private int progress;
 	private int progressVisible;
 	private Item productionTarget;
-	
+
+	public enum WorkMode implements IStringSerializable {
+		CREAM("cream"), BUTTER("butter"), CHEESE("cheese"), NONE("none");
+
+		private String name;
+
+		WorkMode(String name) {
+			this.name=name;
+		}
+
+		public static WorkMode get(@Nonnull Item item) {
+			if (item== Feast.Items.CREAM) return CREAM;
+			else if (item==Feast.Items.BUTTER) return BUTTER;
+			else if (item==Feast.Items.CHEESE) return CHEESE;
+			else return NONE;
+		}
+
+		@Override
+		public String getString() {
+			return this.name;
+		}
+	}
+
 	public DairyMachineTileEntity() {
 		super(TileEntityRegistry.tileEntityDairyMachine.get());
-		DairyMachineMaterialSlot=new ItemStackHandler(1);
+		dairyMachineMaterialSlot=new ItemStackHandler(1);
 		productionSlot=new ItemStackHandler(1);
+		collectionSlot=new ItemStackHandler(9);
 		progress=0;
 		progressVisible=0;
+	}
+
+	public WorkMode getWorkMode() {
+		return WorkMode.get(productionTarget);
 	}
 	
 	public int getProgressVisible() {
@@ -56,6 +90,10 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	
 	public void setProgressVisible(int progressVisible) {
 		this.progressVisible=progressVisible;
+	}
+
+	public <T> LazyOptional<T> getCollectionSlotHolder() {
+		return this.collectionSlotHolder.cast();
 	}
 	
 	@Override
@@ -82,7 +120,7 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 			return;
 		}
 		if (progress==0 && productionTarget==null) {
-			Item material=DairyMachineMaterialSlot.getStackInSlot(0).getItem();
+			Item material=dairyMachineMaterialSlot.getStackInSlot(0).getItem();
 			Item production= DairyMachineRecipe.match(material);
 			if (production!=null) {
 				IProduceItem produce=(IProduceItem) production;
@@ -92,11 +130,11 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 				}
 				boolean hasMax=produce.produceCount()+productionSlot.getStackInSlot(0).getCount()>productionSlot.getSlotLimit(0);
 				boolean sameProduction=production==productionSlot.getStackInSlot(0).getItem() || productionSlot.getStackInSlot(0).getItem()==Items.AIR;
-				if (DairyMachineMaterialSlot.getStackInSlot(0).getCount()>=consumeCount && consumeCount!=0 && !hasMax && sameProduction) {
-					DairyMachineMaterialSlot.extractItem(0,consumeCount,false);
+				if (dairyMachineMaterialSlot.getStackInSlot(0).getCount()>=consumeCount && consumeCount!=0 && !hasMax && sameProduction) {
+					dairyMachineMaterialSlot.extractItem(0,consumeCount,false);
 					if (material==Items.MILK_BUCKET) {
 						ItemStack bucket=new ItemStack(Items.BUCKET,1);
-						DairyMachineMaterialSlot.insertItem(0,bucket,false);
+						dairyMachineMaterialSlot.insertItem(0,bucket,false);
 					}
 					this.productionTarget=production;
 					progressVisible=Math.round(++progress/(float)produce.progressCount()*44);
@@ -129,8 +167,9 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
-		compound.put("feast:mrm.material",DairyMachineMaterialSlot.serializeNBT());
+		compound.put("feast:mrm.material",dairyMachineMaterialSlot.serializeNBT());
 		compound.put("feast:mrm.production",productionSlot.serializeNBT());
+		compound.put("feast:mrm.collection",collectionSlot.serializeNBT());
 		compound.putInt("feast:mrm.progress",progress);
 		compound.putInt("feast:mrm.productionTarget",Item.getIdFromItem(productionTarget));
 		return compound;
@@ -142,8 +181,9 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	@Override
 	public void read(BlockState bs, CompoundNBT compound) {
 		super.read(bs,compound);
-		DairyMachineMaterialSlot.deserializeNBT(compound.getCompound("feast:mrm.material"));
+		dairyMachineMaterialSlot.deserializeNBT(compound.getCompound("feast:mrm.material"));
 		productionSlot.deserializeNBT(compound.getCompound("feast:mrm.production"));
+		collectionSlot.deserializeNBT(compound.getCompound("feast:mrm.collection"));
 		this.progress=compound.getInt("feast:mrm.progress");
 		Item item=Item.getItemById(compound.getInt("feast:mrm.productionTarget"));
 		this.productionTarget=item==Items.AIR?null:item;
@@ -171,6 +211,7 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 		super.remove();
 		dairyMachineMaterialSlotHolder.invalidate();
 		productionSlotHolder.invalidate();
+		collectionSlotHolder.invalidate();
 		allSlotHolder.invalidate();
 	}
 }

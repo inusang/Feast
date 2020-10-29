@@ -33,7 +33,7 @@ public class OvenGuiContainer extends ContainerScreen<OvenContainer> {
 		this.getMinecraft().getTextureManager().bindTexture(TEXTURE);
 		int left=(this.width-this.xSize)/2;	//(width-xSize)/2
 		int top=(this.height-this.ySize)/2;	//(height-ySize)/2
-		this.blit(mStack, left, top, 0, 0, this.xSize, this.ySize);	//call AbstractGui.blit
+		this.blit(mStack, left, top, 0, 0, this.xSize, this.ySize);
 		int barHeight=23;
 		int barWidth=Math.round(this.container.getIntVisibleValue(VisibleIntValueType.PROGRESS)*0.12f);
 		this.blit(mStack,left+81,top+27,0,166,barWidth,barHeight);

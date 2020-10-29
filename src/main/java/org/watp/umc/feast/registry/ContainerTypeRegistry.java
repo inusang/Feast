@@ -18,10 +18,10 @@ public abstract class ContainerTypeRegistry {
 	public static final DeferredRegister<ContainerType<?>> containers=DeferredRegister.create(ForgeRegistries.CONTAINERS,Feast.MODID);
 	
 	public static RegistryObject<ContainerType<OvenContainer>> containerOven=containers.register("oven",
-			()->{ return IForgeContainerType.create(
-			(int windowId,PlayerInventory pi,PacketBuffer extraData)->{ return new OvenContainer(windowId,pi,Minecraft.getInstance().world,extraData.readBlockPos()); }); });
+			()-> IForgeContainerType.create(
+			(int windowId, PlayerInventory pi, PacketBuffer extraData)-> new OvenContainer(windowId,pi,Minecraft.getInstance().world,extraData.readBlockPos())));
 	
 	public static RegistryObject<ContainerType<DairyMachineContainer>> containerDairyMachine=containers.register("dairy_machine",
-			()->{ return IForgeContainerType.create(
-			(int windowId,PlayerInventory pi,PacketBuffer extraData)->{ return new DairyMachineContainer(windowId,pi,Minecraft.getInstance().world,extraData.readBlockPos()); }); });
+			()-> IForgeContainerType.create(
+			(int windowId, PlayerInventory pi, PacketBuffer extraData)-> new DairyMachineContainer(windowId,pi,Minecraft.getInstance().world,extraData.readBlockPos())));
 }

@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.network.play.client.CCloseWindowPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -36,7 +37,8 @@ public abstract class DestroyedGuiAutoCloseBlock extends Block {
             }
             world.removeTileEntity(pos);
         }
-        if (world.isRemote()) {
+        if (world.isRemote() && Minecraft.getInstance().currentScreen!=null) {
+            Minecraft.getInstance().player.connection.sendPacket(new CCloseWindowPacket(Minecraft.getInstance().player.openContainer.windowId));
             Minecraft.getInstance().displayGuiScreen(null);
         }
     }
