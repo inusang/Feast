@@ -4,7 +4,7 @@ license="All rights reserved"
 issueTrackerURL="http://my.issue.tracker/" #optional
 [[mods]] #mandatory
 modId="feast" #mandatory
-version="1.16.3-1.0.0" #mandatory
+version="1.16.4-1.0.0" #mandatory
 displayName="Feast" #mandatory
 authors="inusang" #optional
 description='''
@@ -19,7 +19,7 @@ Supply more foods and menus
 [[dependencies.feast]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.3]"
+    versionRange="[1.16.4]"
     ordering="NONE"
     side="BOTH"
 
