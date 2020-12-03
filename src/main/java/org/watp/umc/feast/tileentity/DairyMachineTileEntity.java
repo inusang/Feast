@@ -43,7 +43,7 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	private LazyOptional<IItemHandler> dairyMachineMaterialSlotHolder=LazyOptional.of(()->dairyMachineMaterialSlot);
 	private LazyOptional<IItemHandler> productionSlotHolder=LazyOptional.of(()->productionSlot);
 	private LazyOptional<IItemHandler> collectionSlotHolder=LazyOptional.of(()->collectionSlot);
-	private LazyOptional<IItemHandler> allSlotHolder=LazyOptional.of(()->new CombinedInvWrapper(dairyMachineMaterialSlot,productionSlot));
+	private LazyOptional<IItemHandler> allSlotHolder=LazyOptional.of(()->new CombinedInvWrapper(dairyMachineMaterialSlot,productionSlot,collectionSlot));
 
 	private int progress;
 	private int progressVisible;
@@ -97,7 +97,7 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	}
 	
 	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+		public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 		Capability<IItemHandler> itemHandlerCap=CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 		if (cap==itemHandlerCap) {
 			this.markDirty();
@@ -167,25 +167,22 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
-		compound.put("feast:mrm.material",dairyMachineMaterialSlot.serializeNBT());
-		compound.put("feast:mrm.production",productionSlot.serializeNBT());
-		compound.put("feast:mrm.collection",collectionSlot.serializeNBT());
-		compound.putInt("feast:mrm.progress",progress);
-		compound.putInt("feast:mrm.productionTarget",Item.getIdFromItem(productionTarget));
+		compound.put("feast:dm.material",dairyMachineMaterialSlot.serializeNBT());
+		compound.put("feast:dm.production",productionSlot.serializeNBT());
+		compound.put("feast:dm.collection",collectionSlot.serializeNBT());
+		compound.putInt("feast:dm.progress",progress);
+		compound.putInt("feast:dm.productionTarget",Item.getIdFromItem(productionTarget));
 		return compound;
 	}
 	
-	/**
-	 * read(BlockState,CompoundNBT)</br>
-	 */
 	@Override
 	public void read(BlockState bs, CompoundNBT compound) {
 		super.read(bs,compound);
-		dairyMachineMaterialSlot.deserializeNBT(compound.getCompound("feast:mrm.material"));
-		productionSlot.deserializeNBT(compound.getCompound("feast:mrm.production"));
-		collectionSlot.deserializeNBT(compound.getCompound("feast:mrm.collection"));
-		this.progress=compound.getInt("feast:mrm.progress");
-		Item item=Item.getItemById(compound.getInt("feast:mrm.productionTarget"));
+		dairyMachineMaterialSlot.deserializeNBT(compound.getCompound("feast:dm.material"));
+		productionSlot.deserializeNBT(compound.getCompound("feast:dm.production"));
+		collectionSlot.deserializeNBT(compound.getCompound("feast:dm.collection"));
+		this.progress=compound.getInt("feast:dm.progress");
+		Item item=Item.getItemById(compound.getInt("feast:dm.productionTarget"));
 		this.productionTarget=item==Items.AIR?null:item;
 	}
 	

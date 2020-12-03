@@ -5,10 +5,6 @@ import java.util.Map;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 
-/**
- * use when produced by feast mod machine
- * 
- */
 public interface IProduceItem {
 	Class<? extends TileEntity> produceIn();
 	
