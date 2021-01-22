@@ -27,6 +27,7 @@ import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.proxy.ClientProxy;
 import org.watp.umc.feast.proxy.IProxy;
 import org.watp.umc.feast.proxy.ServerProxy;
+import org.watp.umc.feast.recipe.OvenRecipe;
 import org.watp.umc.feast.registry.BlockRegistry;
 import org.watp.umc.feast.registry.ContainerTypeRegistry;
 import org.watp.umc.feast.registry.ItemRegistry;
@@ -66,9 +67,7 @@ public class Feast
     	//proxy.init();
     }
 
-    @OnlyIn(Dist.CLIENT)
     private void doClientStuff(final FMLClientSetupEvent event) {
-    	// Enable dairy machine block perform correctly
     	event.enqueueWork(()-> RenderTypeLookup.setRenderLayer(Blocks.DAIRY_MACHINE, RenderType.getCutoutMipped()));
     }
 
@@ -87,11 +86,8 @@ public class Feast
                 collect(Collectors.toList()));
     }*/
     
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
-        // do something when the server starts
-        LOGGER.info("HELLO from server starting");
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
@@ -100,9 +96,7 @@ public class Feast
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-            // register a new block here
             LOGGER.info("HELLO from Register Block");
-            
         }
     }
 

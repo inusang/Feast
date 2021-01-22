@@ -19,9 +19,9 @@ public abstract class ContainerTypeRegistry {
 	
 	public static RegistryObject<ContainerType<OvenContainer>> containerOven=containers.register("oven",
 			()-> IForgeContainerType.create(
-			(int windowId, PlayerInventory pi, PacketBuffer extraData)-> new OvenContainer(windowId,pi,Minecraft.getInstance().world,extraData.readBlockPos())));
+			(int windowId, PlayerInventory pi, PacketBuffer extraData)-> new OvenContainer(windowId, pi, extraData)));
 	
 	public static RegistryObject<ContainerType<DairyMachineContainer>> containerDairyMachine=containers.register("dairy_machine",
 			()-> IForgeContainerType.create(
-			(int windowId, PlayerInventory pi, PacketBuffer extraData)-> new DairyMachineContainer(windowId,pi,Minecraft.getInstance().world,extraData.readBlockPos())));
+			(int windowId, PlayerInventory pi, PacketBuffer extraData)-> new DairyMachineContainer(windowId, pi, extraData)));
 }

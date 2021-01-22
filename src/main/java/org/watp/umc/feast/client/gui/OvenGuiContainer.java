@@ -4,6 +4,7 @@ import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.inventory.OvenContainer;
 import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.network.PacketOvenOpenSync;
+import org.watp.umc.feast.tileentity.OvenTileEntity;
 import org.watp.umc.feast.tileentity.OvenTileEntity.VisibleIntValueType;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -31,20 +32,20 @@ public class OvenGuiContainer extends ContainerScreen<OvenContainer> {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(MatrixStack mStack, float partial, int mouseX, int moustY) {
 		this.getMinecraft().getTextureManager().bindTexture(TEXTURE);
-		int left=(this.width-this.xSize)/2;	//(width-xSize)/2
-		int top=(this.height-this.ySize)/2;	//(height-ySize)/2
+		int left=(this.width-this.xSize)/2;
+		int top=(this.height-this.ySize)/2;
 		this.blit(mStack, left, top, 0, 0, this.xSize, this.ySize);
 		int barHeight=23;
-		int barWidth=Math.round(this.container.getIntVisibleValue(VisibleIntValueType.PROGRESS)*0.12f);
+		int barWidth=Math.round(this.container.getIntVisibleValue(OvenTileEntity.VisibleIntValueType.PROGRESS)*0.12f);
 		this.blit(mStack,left+81,top+27,0,166,barWidth,barHeight);
-		barHeight=Math.round(this.container.getIntVisibleValue(VisibleIntValueType.REMAINING_ENERGY)*0.0006875f);
+		barHeight=Math.round(this.container.getIntVisibleValue(OvenTileEntity.VisibleIntValueType.REMAINING_ENERGY)*0.0006875f);
 		barWidth=2;
 		this.blit(mStack,left+91,top+14-(barHeight-11),178,2,barWidth,barHeight);
-		barHeight=Math.round(this.container.getIntVisibleValue(VisibleIntValueType.TEMPERATURE)*0.0017187f);
+		barHeight=Math.round(this.container.getIntVisibleValue(OvenTileEntity.VisibleIntValueType.TEMPERATURE)*0.0017187f);
 		barWidth=2;
 		if (barHeight>7) this.blit(mStack,left+99,top+14-(barHeight-11),178,15,barWidth,barHeight);
 		else this.blit(mStack,left+99,top+14-(barHeight-11),183,15,barWidth,barHeight);
-		barHeight=Math.round(this.container.getIntVisibleValue(VisibleIntValueType.REMAINING_COOLING)*0.0006875f);
+		barHeight=Math.round(this.container.getIntVisibleValue(OvenTileEntity.VisibleIntValueType.REMAINING_COOLING)*0.0006875f);
 		barWidth=2;
 		if (barHeight>7) this.blit(mStack,left+107,top+14-(barHeight-11),178,28,barWidth,barHeight);
 		else this.blit(mStack,left+107,top+14-(barHeight-11),183,28,barWidth,barHeight);

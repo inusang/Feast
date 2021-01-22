@@ -1,5 +1,10 @@
 package org.watp.umc.feast.inventory;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.inventory.slot.ICheckedSlot;
 import org.watp.umc.feast.inventory.slot.ProductionSlot;
 import org.watp.umc.feast.registry.ContainerTypeRegistry;
@@ -24,13 +29,19 @@ import net.minecraftforge.items.SlotItemHandler;
 public class OvenContainer extends CommonInteractContainer {
 	private OvenTileEntity te;
 	
-	public OvenContainer(int windowId,PlayerInventory pi,World world,BlockPos pos) {
-		super(ContainerTypeRegistry.containerOven.get(),windowId);
-		this.te=(OvenTileEntity) world.getTileEntity(pos);
+	@OnlyIn(Dist.CLIENT)
+	public OvenContainer(int windowId, PlayerInventory pi, PacketBuffer extraData) {
+		this(windowId, pi, (OvenTileEntity) Minecraft.getInstance().world.getTileEntity(extraData.readBlockPos()));
+	}
+
+	public OvenContainer(int windowId, PlayerInventory pi, OvenTileEntity te) {
+		super(Feast.ContainerTypes.OVEN, windowId);
+		this.te=te;
 		this.bindPlayerInventory(pi);
 		this.bindOtherSlots(te);
 		this.trackVars();
 	}
+
 	
 	public Integer getIntVisibleValue(VisibleIntValueType vt) {
 		if (vt==VisibleIntValueType.REMAINING_ENERGY) return te.getIntVisibleValue(VisibleIntValueType.REMAINING_ENERGY);

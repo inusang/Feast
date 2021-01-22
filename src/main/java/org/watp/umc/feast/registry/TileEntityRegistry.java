@@ -13,9 +13,9 @@ public abstract class TileEntityRegistry {
 	public static final DeferredRegister<TileEntityType<?>> TileEntities=DeferredRegister.create(ForgeRegistries.TILE_ENTITIES,Feast.MODID);
 	
 	public static RegistryObject<TileEntityType<OvenTileEntity>> tileEntityOven=TileEntities.register("oven",
-			()->TileEntityType.Builder.create(OvenTileEntity::new, BlockRegistry.blockOven.get()).build(null));
+			()->TileEntityType.Builder.create(OvenTileEntity::new, Feast.Blocks.OVEN).build(null));
 	
 	public static RegistryObject<TileEntityType<DairyMachineTileEntity>> tileEntityDairyMachine=TileEntities.register("dairy_machine",
-			()->TileEntityType.Builder.create(DairyMachineTileEntity::new, BlockRegistry.blockDairyMachine.get()).build(null));
+			()->TileEntityType.Builder.create(DairyMachineTileEntity::new, Feast.Blocks.DAIRY_MACHINE).build(null));
 	
 }

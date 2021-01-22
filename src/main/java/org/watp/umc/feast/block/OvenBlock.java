@@ -66,7 +66,7 @@ public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 					player.getHorizontalFacing().getOpposite()!=state.get(FACING))) {
 				final OvenTileEntity te=(OvenTileEntity) world.getTileEntity(pos);
 				if (te!=null) {
-					NetWorking.INSTANCE.send(PacketDistributor.SERVER.noArg()
+					NetWorking.INSTANCE.send(PacketDistributor.PLAYER.with(()-> (ServerPlayerEntity) player)
 							,new PacketOvenStatSync(pos,te.getIntVisibleValue(VisibleIntValueType.PROGRESS),te.getIntVisibleValue(VisibleIntValueType.TEMPERATURE),
 									te.getIntVisibleValue(VisibleIntValueType.REMAINING_ENERGY),te.getIntVisibleValue(VisibleIntValueType.REMAINING_COOLING),te.getOpen()));
 					te.openGUI((ServerPlayerEntity)player);

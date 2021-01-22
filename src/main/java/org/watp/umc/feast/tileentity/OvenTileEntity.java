@@ -1,5 +1,11 @@
 package org.watp.umc.feast.tileentity;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import joptsimple.OptionParser;
+import joptsimple.OptionSpec;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.watp.umc.feast.block.OvenBlock;
 import org.watp.umc.feast.inventory.OvenContainer;
 import org.watp.umc.feast.item.IProduceItem;
@@ -28,6 +34,12 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class OvenTileEntity extends TileEntity implements ICustomContainer,ITickableTileEntity {
 	private ItemStackHandler materialSlot;
@@ -133,9 +145,9 @@ public class OvenTileEntity extends TileEntity implements ICustomContainer,ITick
 		}
 		else {
 			//check recipe
-			Item[] inputRecipe=new Item[9];
+			List<Item> inputRecipe=new ObjectArrayList<>();
 			for (int i=0;i<9;i++) {
-				inputRecipe[i]=materialSlot.getStackInSlot(i).getItem();
+				inputRecipe.add(materialSlot.getStackInSlot(i).getItem());
 			}
 			Item production=OvenRecipe.match(inputRecipe);
 			if (production==null) {
@@ -285,7 +297,7 @@ public class OvenTileEntity extends TileEntity implements ICustomContainer,ITick
 	
 	@Override
 	public Container createMenu(int windowId, PlayerInventory pi, PlayerEntity player) {
-		return new OvenContainer(windowId,pi,this.world,this.pos);
+		return new OvenContainer(windowId ,pi, this);
 	}
 	
 	@Override

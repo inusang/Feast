@@ -188,7 +188,7 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	
 	@Override
 	public Container createMenu(int windowId, PlayerInventory pi, PlayerEntity pe) {
-		return new DairyMachineContainer(windowId,pi,this.world,this.pos);
+		return new DairyMachineContainer(windowId, pi, this);
 	}
 	
 	@Override

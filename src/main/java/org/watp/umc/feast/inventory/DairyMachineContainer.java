@@ -1,5 +1,9 @@
 package org.watp.umc.feast.inventory;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.ItemStackHandler;
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.inventory.slot.ICheckedSlot;
@@ -27,9 +31,14 @@ import javax.annotation.Nonnull;
 public class DairyMachineContainer extends CommonInteractContainer {
 	private DairyMachineTileEntity te;
 	
-	public DairyMachineContainer(int windowId, PlayerInventory pi, World world, BlockPos pos) {
-		super(ContainerTypeRegistry.containerDairyMachine.get(),windowId);
-		this.te=(DairyMachineTileEntity) world.getTileEntity(pos);
+	@OnlyIn(Dist.CLIENT)
+	public DairyMachineContainer(int windowId, PlayerInventory pi, PacketBuffer extraData) {
+		this(windowId, pi , (DairyMachineTileEntity) Minecraft.getInstance().world.getTileEntity(extraData.readBlockPos()));
+	}
+
+	public DairyMachineContainer(int windowId, PlayerInventory pi, DairyMachineTileEntity te) {
+		super(Feast.ContainerTypes.DAIRY_MACHINE, windowId);
+		this.te=te;
 		this.bindPlayerInventory(pi);
 		this.bindOtherSlots(te);
 		this.trackVars();
