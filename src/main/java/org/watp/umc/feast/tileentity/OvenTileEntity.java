@@ -1,6 +1,5 @@
 package org.watp.umc.feast.tileentity;
 
-import com.sun.istack.internal.NotNull;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.block.OvenBlock;
@@ -149,12 +148,12 @@ public class OvenTileEntity extends TileEntity implements ICustomContainer,ITick
 			//apply fuel and cooling
 			ItemStack simuItem=fuelSlot.extractItem(0,1,true);
 			boolean hasMax=productionSlot.getStackInSlot(0).getCount()==productionSlot.getSlotLimit(0);
-			if (remainingEnergy==0 && production!=null && !hasMax) {
+			if (simuItem!=null && remainingEnergy==0 && production!=null && !hasMax) {
 				fuelSlot.extractItem(0,1,false);
 				addRemainingValue(RemainingValueType.ENERGY,simuItem);
 			}
 			simuItem=freezeSlot.extractItem(0,1,true);
-			if (temperature>1600 && remainingCooling==0) {
+			if (simuItem!=null && temperature>1600 && remainingCooling==0) {
 				freezeSlot.extractItem(0,1,false);
 				addRemainingValue(RemainingValueType.COOLING,simuItem);
 			}
