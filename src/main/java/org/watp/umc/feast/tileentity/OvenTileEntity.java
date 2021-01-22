@@ -1,17 +1,12 @@
 package org.watp.umc.feast.tileentity;
 
+import com.sun.istack.internal.NotNull;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import joptsimple.OptionParser;
-import joptsimple.OptionSpec;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.block.OvenBlock;
 import org.watp.umc.feast.inventory.OvenContainer;
 import org.watp.umc.feast.item.IProduceItem;
 import org.watp.umc.feast.recipe.OvenRecipe;
-import org.watp.umc.feast.registry.TileEntityRegistry;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,11 +31,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class OvenTileEntity extends TileEntity implements ICustomContainer,ITickableTileEntity {
 	private ItemStackHandler materialSlot;
@@ -158,12 +149,12 @@ public class OvenTileEntity extends TileEntity implements ICustomContainer,ITick
 			//apply fuel and cooling
 			ItemStack simuItem=fuelSlot.extractItem(0,1,true);
 			boolean hasMax=productionSlot.getStackInSlot(0).getCount()==productionSlot.getSlotLimit(0);
-			if (simuItem!=null && remainingEnergy==0 && production!=null && !hasMax) {
+			if (remainingEnergy==0 && production!=null && !hasMax) {
 				fuelSlot.extractItem(0,1,false);
 				addRemainingValue(RemainingValueType.ENERGY,simuItem);
 			}
 			simuItem=freezeSlot.extractItem(0,1,true);
-			if (simuItem!=null && temperature>1600 && remainingCooling==0) {
+			if (temperature>1600 && remainingCooling==0) {
 				freezeSlot.extractItem(0,1,false);
 				addRemainingValue(RemainingValueType.COOLING,simuItem);
 			}

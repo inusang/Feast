@@ -8,7 +8,6 @@ import org.watp.umc.feast.block.DairyMachineBlock;
 import org.watp.umc.feast.inventory.DairyMachineContainer;
 import org.watp.umc.feast.item.IProduceItem;
 import org.watp.umc.feast.recipe.DairyMachineRecipe;
-import org.watp.umc.feast.registry.TileEntityRegistry;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,7 +32,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nonnull;
-import javax.swing.plaf.basic.BasicButtonUI;
 
 public class DairyMachineTileEntity extends TileEntity implements ICustomContainer,ITickableTileEntity {
 	private ItemStackHandler dairyMachineMaterialSlot;
