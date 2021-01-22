@@ -72,7 +72,7 @@ public class DairyMachineTileEntity extends TileEntity implements ICustomContain
 	}
 
 	public DairyMachineTileEntity() {
-		super(TileEntityRegistry.tileEntityDairyMachine.get());
+		super(Feast.TileEntities.DAIRY_MACHINE);
 		dairyMachineMaterialSlot=new ItemStackHandler(1);
 		productionSlot=new ItemStackHandler(1);
 		collectionSlot=new ItemStackHandler(9);

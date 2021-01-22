@@ -6,6 +6,7 @@ import joptsimple.OptionSpec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.block.OvenBlock;
 import org.watp.umc.feast.inventory.OvenContainer;
 import org.watp.umc.feast.item.IProduceItem;
@@ -66,7 +67,7 @@ public class OvenTileEntity extends TileEntity implements ICustomContainer,ITick
 	private LazyOptional<IItemHandler> allSlotHolder=LazyOptional.of(()->new CombinedInvWrapper(materialSlot,fuelSlot,freezeSlot,productionSlot));
 	
 	public OvenTileEntity() {
-		super(TileEntityRegistry.tileEntityOven.get());
+		super(Feast.TileEntities.OVEN);
 		materialSlot=new ItemStackHandler(9);
 		fuelSlot=new ItemStackHandler(1);
 		freezeSlot=new ItemStackHandler(1);
