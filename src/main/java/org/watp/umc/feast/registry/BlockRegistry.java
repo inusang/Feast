@@ -12,7 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public abstract class BlockRegistry {
 	public static final DeferredRegister<Block> BLOCKS=DeferredRegister.create(ForgeRegistries.BLOCKS,Feast.MODID);
-	
+
 	public static RegistryObject<Block> blockOven=BLOCKS.register("oven",OvenBlock::new);
 	public static RegistryObject<Block> blockDairyMachine=BLOCKS.register("dairy_machine", DairyMachineBlock::new);
 	

@@ -5,29 +5,46 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "feast:salt",
-          "functions": [
+          "type": "minecraft:alternatives",
+          "children": [
             {
-              "function": "minecraft:set_count",
-              "count": {
-              	"min": 12,
-              	"max": 15
-              }
+              "type": "minecraft:item",
+              "name": "feast:salt_ore",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
             },
             {
-              "function": "minecraft:looting_enchant",
-              "count": {
-              	"min": 2,
-              	"max": 6
-              }
+              "type": "minecraft:item",
+              "name": "feast:salt",
+              "functions": [
+                {
+                  "function": "minecraft:apply_bonus",
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:binomial_with_bonus_count",
+                  "parameters": {
+                    "extra": 6,
+                    "probability": 0.618
+                  }
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ]
             }
           ]
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
         }
       ]
     }

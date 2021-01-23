@@ -1,13 +1,21 @@
 package org.watp.umc.feast;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.placement.ChanceConfig;
+import net.minecraft.world.gen.placement.DepthAverageConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +27,7 @@ import net.minecraftforge.registries.ObjectHolder;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.watp.umc.feast.block.SaltOreBlock;
 import org.watp.umc.feast.inventory.DairyMachineContainer;
 import org.watp.umc.feast.inventory.OvenContainer;
 import org.watp.umc.feast.network.NetWorking;
@@ -31,6 +40,8 @@ import org.watp.umc.feast.registry.ItemRegistry;
 import org.watp.umc.feast.registry.TileEntityRegistry;
 import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 import org.watp.umc.feast.tileentity.OvenTileEntity;
+
+import java.util.Set;
 
 @Mod(value=Feast.MODID)
 public class Feast
@@ -93,9 +104,29 @@ public class Feast
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-            LOGGER.info("HELLO from Register Block");
+
         }
     }
+
+	@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
+	public static class RescGen {
+		@SubscribeEvent
+		public static void addRescToBiomes(BiomeLoadingEvent event) {
+			/*if (event.getName().toString().equals("minecraft:plains")) {
+				event.getGeneration().withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Features.PATCH_MELON.chance(2));
+			}*/
+			// gen salt ore
+			String biomeName=event.getName().toString();
+			Set<String> genSaltOreBiomes=((SaltOreBlock) Blocks.SALT_ORE).genInBiome();
+			if (genSaltOreBiomes.contains(biomeName)) {
+				event.getGeneration().withFeature(GenerationStage.Decoration.RAW_GENERATION, Feature.DISK.withConfiguration(
+					new SphereReplaceConfig(Blocks.SALT_ORE.getDefaultState(),
+						FeatureSpread.func_242253_a(2, 1),1,
+							ImmutableList.of(net.minecraft.block.Blocks.DIRT.getDefaultState(), net.minecraft.block.Blocks.GRAVEL.getDefaultState()))).
+						withPlacement(Features.Placements.SEAGRASS_DISK_PLACEMENT).chance(1));
+			}
+		}
+	}
 
 	@ObjectHolder(Feast.MODID)
 	public static class Items {
@@ -119,6 +150,8 @@ public class Feast
 	public static class Blocks {
 		public static final Block OVEN=null;
 		public static final Block DAIRY_MACHINE=null;
+
+		public static final Block SALT_ORE=null;
 	}
 
 	@ObjectHolder(Feast.MODID)

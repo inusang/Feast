@@ -13,6 +13,7 @@ public class CabbageBlock extends Block implements IGenBlock {
 
 	@Override
 	public Set<String> genInBiome() {
-		return Sets.newHashSet();
+		return Sets.newHashSet("minecraft:plains",
+				"minecraft:sunflower_plains");
 	}
 }
