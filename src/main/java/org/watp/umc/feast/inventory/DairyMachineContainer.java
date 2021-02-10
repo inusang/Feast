@@ -55,33 +55,11 @@ public class DairyMachineContainer extends CommonInteractContainer {
 		IItemHandler productionItemStack=te.getCapability(itemHandlerCap,Direction.DOWN).orElse(null);
 		this.addSlot(new ProductionSlot(productionItemStack,0,121,28));
 	}
-	
+
 	@Override
 	protected void trackVars() {
-		this.trackInt(new IntReferenceHolder() {
-			@Override
-			public int get() {
-				return te.getProgressVisible() & 0xffff;
-			}
-
-			@Override
-			public void set(int value) {
-				te.setProgressVisible(value);
-			}
-		});
-		this.trackInt(new IntReferenceHolder() {
-			@Override
-			public int get() {
-				return te.getProgress() & 0xffff;
-			}
-
-			@Override
-			public void set(int value) {
-				te.setProgress(value);
-			}
-		});
 	}
-	
+
 	private class MRMMaterialSlot extends SlotItemHandler implements ICheckedSlot {
 		public MRMMaterialSlot(IItemHandler itemHandler,int index,int xPos,int yPos) {
 			super(itemHandler,index,xPos,yPos);

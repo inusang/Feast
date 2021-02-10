@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.network.PacketDistributor;
-import org.lwjgl.system.CallbackI;
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.block.DairyMachineBlock;
 import org.watp.umc.feast.inventory.DairyMachineContainer;
@@ -35,7 +34,6 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import org.watp.umc.feast.item.IProduceItem;
 import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.network.PacketDMStatS2C;
-import org.watp.umc.feast.registry.ItemRegistry;
 
 import javax.annotation.Nonnull;
 
