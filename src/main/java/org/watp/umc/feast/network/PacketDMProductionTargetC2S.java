@@ -13,7 +13,7 @@ public class PacketDMProductionTargetC2S {
 
     public PacketDMProductionTargetC2S(PacketBuffer buffer) {
         this.pos=buffer.readBlockPos();
-        this.productionTargetName=buffer.readString();
+        this.productionTargetName=buffer.readString(32767);
     }
 
     public PacketDMProductionTargetC2S(BlockPos pos, String productionTargetName) {
