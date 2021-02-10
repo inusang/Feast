@@ -8,8 +8,9 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.apache.logging.log4j.core.jmx.Server;
 import org.watp.umc.feast.network.NetWorking;
-import org.watp.umc.feast.network.PacketDMStatSync;
+import org.watp.umc.feast.network.PacketDMStatS2C;
 import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 
 import net.minecraft.block.Block;
@@ -34,17 +35,16 @@ import java.util.Random;
 public class DairyMachineBlock extends DestroyedGuiAutoCloseBlock {
 	protected static final DirectionProperty FACING=HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty WORKING=BooleanProperty.create("working");
-	public static final EnumProperty WORKMODE=EnumProperty.create("work_mode", DairyMachineTileEntity.WorkMode.class);
 
 	public DairyMachineBlock() {
 		super(Properties.create(Material.IRON).hardnessAndResistance(15f,4f).harvestTool(ToolType.PICKAXE).harvestLevel(1).notSolid());
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WORKING,false).with(WORKMODE, DairyMachineTileEntity.WorkMode.NONE));
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WORKING,false));
 	}
 
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder) {
 		super.fillStateContainer(builder);
-		builder.add(FACING,WORKING,WORKMODE);
+		builder.add(FACING,WORKING);
 	}
 
 	@Override
@@ -74,8 +74,8 @@ public class DairyMachineBlock extends DestroyedGuiAutoCloseBlock {
 		if (!world.isRemote()) {
 			final DairyMachineTileEntity te=(DairyMachineTileEntity) world.getTileEntity(pos);
 			if (te!=null) {
-				NetWorking.INSTANCE.send(PacketDistributor.SERVER.noArg()
-						,new PacketDMStatSync(pos,te.getProgressVisible()));
+				NetWorking.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player)
+						,new PacketDMStatS2C(pos, te.isOperable(), te.getProgress(), te.getProgressVisible(), te.getProductionTarget()));
 				te.openGUI((ServerPlayerEntity)player);
 			}
 			return ActionResultType.CONSUME;

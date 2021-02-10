@@ -13,7 +13,7 @@ public class SaltOreBlock extends Block implements IGenBlock {
 	}
 
 	@Override
-	public Set<String> genInBiome() {
+	public Set<String> genInBiomes() {
 		return Sets.newHashSet("minecraft:river",
 				"minecraft:frozen_river",
 				"minecraft:desert_lakes",

@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class PizzaPartItem extends Item implements IProduceItem {
 	public PizzaPartItem() {
-		super(new Properties().group(ItemGroup.FOOD).rarity(Rarity.UNCOMMON).food(new Food.Builder().hunger(14).saturation(1.3f).build()));
+		super(new Properties().group(ItemGroup.FOOD).rarity(Rarity.UNCOMMON).food(new Food.Builder().hunger(14).saturation(1.4f).build()));
 	}
 	
 	@Override

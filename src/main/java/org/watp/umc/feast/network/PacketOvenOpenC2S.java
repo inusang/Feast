@@ -8,16 +8,16 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-public class PacketOvenOpenSync {
+public class PacketOvenOpenC2S {
 	private final BlockPos pos;
 	private final int open;
 	
-	public PacketOvenOpenSync(PacketBuffer buffer) {
+	public PacketOvenOpenC2S(PacketBuffer buffer) {
 		this.pos=buffer.readBlockPos();
 		this.open=buffer.readInt();
 	}
 	
-	public PacketOvenOpenSync(BlockPos pos,int open) {
+	public PacketOvenOpenC2S(BlockPos pos, int open) {
 		this.pos=pos;
 		this.open=open;
 	}
@@ -32,5 +32,6 @@ public class PacketOvenOpenSync {
 			OvenTileEntity te=(OvenTileEntity) ctx.get().getSender().world.getTileEntity(pos);
 			te.setOpen(open);
 		});
+		ctx.get().setPacketHandled(true);
 	}
 }

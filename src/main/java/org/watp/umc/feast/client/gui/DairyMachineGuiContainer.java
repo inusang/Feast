@@ -1,8 +1,12 @@
 package org.watp.umc.feast.client.gui;
 
+import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.widget.button.AbstractButton;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,25 +19,23 @@ import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import org.watp.umc.feast.network.NetWorking;
+import org.watp.umc.feast.network.PacketDMProductionTargetC2S;
+import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContainer> {
 	private static final ResourceLocation TEXTURE=new ResourceLocation(Feast.MODID+":textures/gui/container/dairy_machine_table.png");
-	
+	private static final int buttonListX=45;
+	private static final int buttonListY=166;
+	private static final ProduceButtonPosition produceCreamButton=new ProduceButtonPosition(56, 51);
+	private static final ProduceButtonPosition produceButterButton=new ProduceButtonPosition(79, 51);
+	private static final ProduceButtonPosition produceCheeseButton=new ProduceButtonPosition(102, 51);
+
 	public DairyMachineGuiContainer(DairyMachineContainer container, PlayerInventory pi, ITextComponent title) {
 		super(container,pi,title);
-	}
-
-	@Override
-	protected void init() {
-		super.init();
-		int left=(this.width-this.xSize)/2;
-		int top=(this.height-this.ySize)/2;
-		ProduceModeButton creamButton=new ProduceModeButton(left+57, top+36, 45 ,166);
-		ProduceModeButton butterButton=new ProduceModeButton(left+79, top+36, 63, 166);
-		ProduceModeButton cheeseButton=new ProduceModeButton(left+101, top+36, 81, 166);
-		this.addButton(creamButton);
-		this.addButton(butterButton);
-		this.addButton(cheeseButton);
 	}
 
 	@Override
@@ -44,43 +46,99 @@ public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContai
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(MatrixStack mStack, float partial, int mouseX, int moustY) {
+	protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float partial, int mouseX, int moustY) {
 		this.getMinecraft().getTextureManager().bindTexture(TEXTURE);
 		int left=(this.width-this.xSize)/2;
 		int top=(this.height-this.ySize)/2;
-		this.blit(mStack, left, top, 0, 0, this.xSize, this.ySize);
+		this.blit(stack, left, top, 0, 0, this.xSize, this.ySize);
 		int barHeight=15;
 		int barWidth=this.container.getTileEntity().getProgressVisible();
-		this.blit(mStack,left+66,top+18,0, 166, barWidth, barHeight);
+		this.blit(stack,left+66,top+28,0, 166, barWidth, barHeight);
+		this.renderButtons(stack, left, top);
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	private static final class ProduceModeButton extends AbstractButton {
-		private static ProduceModeButton selectedButton;
-		private static boolean isSelectedNow;
-		private int blitX;
-		private int blitY;
+	private void renderButtons(MatrixStack stack, int left,int top) {
+		DairyMachineTileEntity te=this.container.getTileEntity();
+		if (te.getProductionTarget()== Items.AIR) {
+			blitButton(stack, DairyMachineTileEntity.WorkMode.CREAM, left , top, 0);
+			blitButton(stack, DairyMachineTileEntity.WorkMode.BUTTER, left , top, 0);
+			blitButton(stack, DairyMachineTileEntity.WorkMode.CHEESE, left , top, 0);
+		}
+		else {
+			List<DairyMachineTileEntity.WorkMode> unselecteds= Lists.newArrayList(DairyMachineTileEntity.WorkMode.values());
+			unselecteds.remove(DairyMachineTileEntity.WorkMode.getByItem(te.getProductionTarget()));
+			blitButtonSelected(stack, DairyMachineTileEntity.WorkMode.getByItem(te.getProductionTarget()), left, top);
+			if (te.isOperable()) {
+				blitButtonUnSelected(stack, unselecteds, left, top);
+			}
+			else {
+				blitButtonCantSelected(stack, unselecteds, left, top);
+			}
+		}
+	}
 
-		public ProduceModeButton(int x, int y, int blitX, int blitY) {
-			super(x, y, 18, 18, StringTextComponent.EMPTY);
-			this.blitX=blitX;
-			this.blitY=blitY;
+	private void blitButton(MatrixStack stack, DairyMachineTileEntity.WorkMode mode, int left, int top, int offsetY) {
+		if (mode== DairyMachineTileEntity.WorkMode.CREAM){
+			this.blit(stack, left+produceCreamButton.getX(), top+produceCreamButton.getY(), buttonListX, buttonListY+offsetY, 18, 18);
+		}
+		else if (mode== DairyMachineTileEntity.WorkMode.BUTTER){
+			this.blit(stack, left+produceButterButton.getX(), top+produceButterButton.getY(), buttonListX+18, buttonListY+offsetY, 18, 18);
+		}
+		else if (mode== DairyMachineTileEntity.WorkMode.CHEESE) {
+			this.blit(stack, left+produceCheeseButton.getX(), top+produceCheeseButton.getY(), buttonListX+36, buttonListY+offsetY, 18, 18);
+		}
+	}
+
+	private void blitButtonSelected(MatrixStack stack, DairyMachineTileEntity.WorkMode mode, int left, int top){
+		blitButton(stack, mode, left, top, 18);
+	}
+
+	private void blitButtonUnSelected(MatrixStack stack, List<DairyMachineTileEntity.WorkMode> modes, int left, int top) {
+		for (DairyMachineTileEntity.WorkMode mode : modes) {
+			blitButton(stack, mode, left, top, 0);
+		}
+	}
+
+	private void blitButtonCantSelected(MatrixStack stack, List<DairyMachineTileEntity.WorkMode> modes, int left, int top) {
+		for (DairyMachineTileEntity.WorkMode mode : modes) {
+			blitButton(stack, mode, left, top, 36);
+		}
+	}
+
+	@Override
+	public boolean mouseClicked(double mouseX, double mouseY, int button) {
+		int left=(this.width-this.xSize)/2;
+		int top=(this.height-this.ySize)/2;
+		if (mouseX>left+produceCreamButton.getX() && mouseX<left+produceCreamButton.getX()+18 && mouseY>top+produceCreamButton.getY() && mouseY<top+produceCreamButton.getY()+18){
+			Minecraft.getInstance().getSoundHandler().play(SimpleSound.master(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+			NetWorking.INSTANCE.sendToServer(new PacketDMProductionTargetC2S(this.container.getTileEntity().getPos(), DairyMachineTileEntity.WorkMode.CREAM.getProductionTarget().getRegistryName().toString()));
+		}
+		else if (mouseX>left+produceButterButton.getX() && mouseX<left+produceButterButton.getX()+18 && mouseY>top+produceButterButton.getY() && mouseY<top+produceButterButton.getY()+18){
+			Minecraft.getInstance().getSoundHandler().play(SimpleSound.master(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+			NetWorking.INSTANCE.sendToServer(new PacketDMProductionTargetC2S(this.container.getTileEntity().getPos(), DairyMachineTileEntity.WorkMode.BUTTER.getProductionTarget().getRegistryName().toString()));
+		}
+		else if (mouseX>left+produceCheeseButton.getX() && mouseX<left+produceCheeseButton.getX()+18 && mouseY>top+produceCheeseButton.getY() && mouseY<top+produceCheeseButton.getY()+18){
+			Minecraft.getInstance().getSoundHandler().play(SimpleSound.master(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+			NetWorking.INSTANCE.sendToServer(new PacketDMProductionTargetC2S(this.container.getTileEntity().getPos(), DairyMachineTileEntity.WorkMode.CHEESE.getProductionTarget().getRegistryName().toString()));
+		}
+		return super.mouseClicked(mouseX, mouseY, button);
+	}
+
+	private static final class ProduceButtonPosition {
+		private final int x;
+		private final int y;
+
+		public ProduceButtonPosition(int x, int y) {
+			this.x=x;
+			this.y=y;
 		}
 
-		@Override
-		public void renderButton(MatrixStack mStack, int mouseX, int mouseY, float partialTicks) {
-			Minecraft.getInstance().getTextureManager().bindTexture(TEXTURE);
-			this.blit(mStack, this.x, this.y, blitX, blitY, this.width, this.height);
+		public int getX() {
+			return this.x;
 		}
 
-		@Override
-		public void onClick(double p_230982_1_, double p_230982_3_) {
-			super.onClick(p_230982_1_, p_230982_3_);
-		}
-
-		@Override
-		public void onPress() {
-
+		public int getY() {
+			return this.y;
 		}
 	}
 }

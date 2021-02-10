@@ -9,7 +9,9 @@
 	"item.feast.pizza_part": "块状披萨",
 	"item.feast.cod_bar": "鳕鱼条",
 	"item.feast.salmon_roll": "鲑鱼卷",
+	"item.feast.cabbage_seeds": "卷心菜种子",
 	"block.feast.oven": "烤箱",
 	"block.feast.dairy_machine": "乳制品精炼机",
-	"block.feast.salt_ore": "盐矿石"
+	"block.feast.salt_ore": "盐矿石",
+	"block.feast.cabbage": "卷心菜"
 }

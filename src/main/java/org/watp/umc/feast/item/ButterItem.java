@@ -2,7 +2,7 @@ package org.watp.umc.feast.item;
 
 import java.util.Map;
 
-import org.watp.umc.feast.Feast;
+import net.minecraft.item.Items;
 import org.watp.umc.feast.math.Constants;
 import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 
@@ -25,13 +25,13 @@ public class ButterItem extends Item implements IProduceItem {
 	@Override
 	public Map<Item, Integer> consume() {
 		Map<Item,Integer> map=Maps.newHashMap();
-		map.put(Feast.Items.CREAM,4);
+		map.put(Items.MILK_BUCKET,1);
 		return map;
 	}
 	
 	@Override
 	public int produceCount() {
-		return 1;
+		return 2;
 	}
 	
 	@Override

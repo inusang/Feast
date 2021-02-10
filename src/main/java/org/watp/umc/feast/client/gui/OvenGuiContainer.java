@@ -3,9 +3,8 @@ package org.watp.umc.feast.client.gui;
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.inventory.OvenContainer;
 import org.watp.umc.feast.network.NetWorking;
-import org.watp.umc.feast.network.PacketOvenOpenSync;
+import org.watp.umc.feast.network.PacketOvenOpenC2S;
 import org.watp.umc.feast.tileentity.OvenTileEntity;
-import org.watp.umc.feast.tileentity.OvenTileEntity.VisibleIntValueType;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
@@ -59,7 +58,7 @@ public class OvenGuiContainer extends ContainerScreen<OvenContainer> {
 		if (posX>=left+158 && posX<=left+162 && posY>=top+9 && posY<=top+18) {
 			int open=this.container.getOpen();
 			open=open==0?1:0;
-			NetWorking.INSTANCE.sendToServer(new PacketOvenOpenSync(this.container.getTileEntity().getPos(),open));
+			NetWorking.INSTANCE.sendToServer(new PacketOvenOpenC2S(this.container.getTileEntity().getPos(), open));
 		}
 		return super.mouseClicked(posX,posY,key);
 	}

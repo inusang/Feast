@@ -2,19 +2,15 @@ package org.watp.umc.feast.item.food;
 
 import java.util.Map;
 
+import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.item.IProduceItem;
 import org.watp.umc.feast.math.Constants;
 import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 
 import com.google.common.collect.Maps;
 
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Rarity;
 import net.minecraft.tileentity.TileEntity;
 
 public class CheeseItem extends Item implements IProduceItem {
@@ -30,7 +26,7 @@ public class CheeseItem extends Item implements IProduceItem {
 	@Override
 	public Map<Item, Integer> consume() {
 		Map<Item,Integer> map=Maps.newHashMap();
-		map.put(Feast.Items.BUTTER,1);
+		map.put(Items.MILK_BUCKET,1);
 		return map;
 	}
 	

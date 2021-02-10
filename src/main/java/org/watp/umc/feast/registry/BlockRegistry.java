@@ -17,5 +17,6 @@ public abstract class BlockRegistry {
 	public static RegistryObject<Block> blockDairyMachine=BLOCKS.register("dairy_machine", DairyMachineBlock::new);
 	
 	public static RegistryObject<Block> blockSaltOre=BLOCKS.register("salt_ore",SaltOreBlock::new);
-	
+
+	//public static RegistryObject<Block> blockCabbage=BLOCKS.register("cabbage", CabbageBlock::new);
 }

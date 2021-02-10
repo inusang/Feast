@@ -8,8 +8,10 @@
 	"item.feast.potato_beef_pie": "potato beef pie",
 	"item.feast.pizza_part": "part of pizza",
 	"item.feast.cod_bar": "cod bar",
-	"item.feast.salmon_roll": "salmon_roll",
+	"item.feast.salmon_roll": "salmon roll",
+	"item.feast.cabbage_seeds": "cabbage seeds",
 	"block.feast.oven": "oven",
 	"block.feast.dairy_machine": "milk refine machine",
-	"block.feast.salt_ore": "salt ore"
+	"block.feast.salt_ore": "salt ore",
+	"block.feast.cabbage": "cabbage"
 }

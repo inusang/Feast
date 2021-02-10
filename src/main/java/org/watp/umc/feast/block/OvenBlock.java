@@ -2,7 +2,7 @@ package org.watp.umc.feast.block;
 
 import net.minecraft.world.IWorld;
 import org.watp.umc.feast.network.NetWorking;
-import org.watp.umc.feast.network.PacketOvenStatSync;
+import org.watp.umc.feast.network.PacketOvenStatS2C;
 import org.watp.umc.feast.tileentity.OvenTileEntity;
 import org.watp.umc.feast.tileentity.OvenTileEntity.VisibleIntValueType;
 
@@ -35,7 +35,7 @@ public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 	public OvenBlock() {
 		super(Properties.create(Material.IRON).hardnessAndResistance(6f,4f).harvestTool(ToolType.PICKAXE).harvestLevel(1).
 				setLightLevel(bs->0));
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(OVEN_STAT,0));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(OVEN_STAT,0));
 	}
 	
 	@Override
@@ -67,7 +67,7 @@ public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 				final OvenTileEntity te=(OvenTileEntity) world.getTileEntity(pos);
 				if (te!=null) {
 					NetWorking.INSTANCE.send(PacketDistributor.PLAYER.with(()-> (ServerPlayerEntity) player)
-							,new PacketOvenStatSync(pos,te.getIntVisibleValue(VisibleIntValueType.PROGRESS),te.getIntVisibleValue(VisibleIntValueType.TEMPERATURE),
+							,new PacketOvenStatS2C(pos,te.getIntVisibleValue(VisibleIntValueType.PROGRESS),te.getIntVisibleValue(VisibleIntValueType.TEMPERATURE),
 									te.getIntVisibleValue(VisibleIntValueType.REMAINING_ENERGY),te.getIntVisibleValue(VisibleIntValueType.REMAINING_COOLING),te.getOpen()));
 					te.openGUI((ServerPlayerEntity)player);
 				}

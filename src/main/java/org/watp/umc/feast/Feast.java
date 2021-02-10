@@ -2,7 +2,6 @@ package org.watp.umc.feast;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.inventory.container.ContainerType;
@@ -10,9 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.DepthAverageConfig;
-import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -117,7 +113,7 @@ public class Feast
 			}*/
 			// gen salt ore
 			String biomeName=event.getName().toString();
-			Set<String> genSaltOreBiomes=((SaltOreBlock) Blocks.SALT_ORE).genInBiome();
+			Set<String> genSaltOreBiomes=((SaltOreBlock) Blocks.SALT_ORE).genInBiomes();
 			if (genSaltOreBiomes.contains(biomeName)) {
 				event.getGeneration().withFeature(GenerationStage.Decoration.RAW_GENERATION, Feature.DISK.withConfiguration(
 					new SphereReplaceConfig(Blocks.SALT_ORE.getDefaultState(),
@@ -135,6 +131,8 @@ public class Feast
 
 	    public static final Item WHEATMEAL=null;
 	    public static final Item SALT=null;
+
+	    public static final Item CABBAGE_SEEDS=null;
 
 	    public static final Item CREAM=null;
 	    public static final Item BUTTER=null;

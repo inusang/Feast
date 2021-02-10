@@ -1,10 +1,7 @@
 package org.watp.umc.feast.registry;
 
 import org.watp.umc.feast.Feast;
-import org.watp.umc.feast.item.ButterItem;
-import org.watp.umc.feast.item.CreamItem;
-import org.watp.umc.feast.item.SaltItem;
-import org.watp.umc.feast.item.WheatmealItem;
+import org.watp.umc.feast.item.*;
 import org.watp.umc.feast.item.food.ApplePieItem;
 import org.watp.umc.feast.item.food.CheeseItem;
 import org.watp.umc.feast.item.food.CodBarItem;
@@ -40,4 +37,8 @@ public abstract class ItemRegistry {
 	public static RegistryObject<Item> PIZZA_PART=ITEMS.register("pizza_part",PizzaPartItem::new);
 	public static RegistryObject<Item> COD_BAR=ITEMS.register("cod_bar",CodBarItem::new);
 	public static RegistryObject<Item> SALMON_ROLL=ITEMS.register("salmon_roll",SalmonRollItem::new);
+
+	public static RegistryObject<Item> CABBAGE_SEEDS=ITEMS.register("cabbage_seeds", CabbageSeedsItem::new);
+	//public static RegistryObject<Item> CABBAGE=
+	//		ITEMS.register("cabbage", () -> new BlockItem(BlockRegistry.blockCabbage.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
 }

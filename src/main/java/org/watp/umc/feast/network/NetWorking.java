@@ -13,10 +13,11 @@ public class NetWorking {
 	private static int id=0;
 	
 	public static void registerMessage() {
-		INSTANCE=NetworkRegistry.newSimpleChannel(new ResourceLocation(Feast.MODID,"feastdatasync"),
+		INSTANCE=NetworkRegistry.newSimpleChannel(new ResourceLocation(Feast.MODID,"networking"),
 				()->VERSION,version->version.equals(VERSION),version->version.equals(VERSION));
-		INSTANCE.registerMessage(id++,PacketOvenOpenSync.class,PacketOvenOpenSync::toBytes,PacketOvenOpenSync::new,PacketOvenOpenSync::handle);
-		INSTANCE.registerMessage(id++,PacketOvenStatSync.class,PacketOvenStatSync::toBytes,PacketOvenStatSync::new,PacketOvenStatSync::handle);
-		INSTANCE.registerMessage(id++,PacketDMStatSync.class, PacketDMStatSync::toBytes, PacketDMStatSync::new, PacketDMStatSync::handle);
+		INSTANCE.registerMessage(id++, PacketOvenOpenC2S.class, PacketOvenOpenC2S::toBytes, PacketOvenOpenC2S::new, PacketOvenOpenC2S::handle);
+		INSTANCE.registerMessage(id++, PacketOvenStatS2C.class, PacketOvenStatS2C::toBytes, PacketOvenStatS2C::new, PacketOvenStatS2C::handle);
+		INSTANCE.registerMessage(id++, PacketDMStatS2C.class, PacketDMStatS2C::toBytes, PacketDMStatS2C::new, PacketDMStatS2C::handle);
+		INSTANCE.registerMessage(id++, PacketDMProductionTargetC2S.class, PacketDMProductionTargetC2S::toBytes, PacketDMProductionTargetC2S::new, PacketDMProductionTargetC2S::handle);
 	}
 }

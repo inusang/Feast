@@ -9,7 +9,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-public class PacketOvenStatSync {
+public class PacketOvenStatS2C {
 	private final BlockPos pos;
 	private final int progress;
 	private final int temperature;
@@ -17,7 +17,7 @@ public class PacketOvenStatSync {
 	private final int remainingCooling;
 	private final int open;
 	
-	public PacketOvenStatSync(PacketBuffer buffer) {
+	public PacketOvenStatS2C(PacketBuffer buffer) {
 		this.pos=buffer.readBlockPos();
 		this.progress=buffer.readInt();
 		this.temperature=buffer.readInt();
@@ -26,8 +26,8 @@ public class PacketOvenStatSync {
 		this.open=buffer.readInt();
 	}
 	
-	public PacketOvenStatSync(BlockPos pos,
-			int progress,int temperature,int remainingEnergy,int remainingCooling,int open) {
+	public PacketOvenStatS2C(BlockPos pos,
+							 int progress, int temperature, int remainingEnergy, int remainingCooling, int open) {
 		this.pos=pos;
 		this.progress=progress;
 		this.temperature=temperature;
@@ -54,5 +54,6 @@ public class PacketOvenStatSync {
 			te.setRemainingCooling(remainingCooling);
 			te.setOpen(open);
 		});
+		ctx.get().setPacketHandled(true);
 	}
 }
