@@ -7,7 +7,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.inventory.slot.ICheckedSlot;
 import org.watp.umc.feast.inventory.slot.ProductionSlot;
-import org.watp.umc.feast.registry.ContainerTypeRegistry;
 import org.watp.umc.feast.tileentity.OvenTileEntity;
 import org.watp.umc.feast.tileentity.OvenTileEntity.VisibleIntValueType;
 
@@ -19,8 +18,6 @@ import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IntReferenceHolder;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;

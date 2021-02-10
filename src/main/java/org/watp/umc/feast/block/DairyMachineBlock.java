@@ -2,13 +2,11 @@ package org.watp.umc.feast.block;
 
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.EnumProperty;
 import net.minecraft.util.*;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.network.PacketDMStatS2C;
 import org.watp.umc.feast.tileentity.DairyMachineTileEntity;

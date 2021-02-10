@@ -3,13 +3,8 @@ package org.watp.umc.feast.client.gui;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
-import net.minecraft.client.gui.widget.button.AbstractButton;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.inventory.DairyMachineContainer;
 
@@ -23,7 +18,6 @@ import org.watp.umc.feast.network.NetWorking;
 import org.watp.umc.feast.network.PacketDMProductionTargetC2S;
 import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContainer> {
