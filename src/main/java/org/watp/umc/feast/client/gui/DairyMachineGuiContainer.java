@@ -19,6 +19,7 @@ import org.watp.umc.feast.network.PacketDMProductionTargetC2S;
 import org.watp.umc.feast.tileentity.DairyMachineTileEntity;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContainer> {
 	private static final ResourceLocation TEXTURE=new ResourceLocation(Feast.MODID+":textures/gui/container/dairy_machine_table.png");
@@ -53,13 +54,11 @@ public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContai
 
 	private void renderButtons(MatrixStack stack, int left,int top) {
 		DairyMachineTileEntity te=this.container.getTileEntity();
+		List<DairyMachineTileEntity.WorkMode> unselecteds= Lists.newArrayList(DairyMachineTileEntity.WorkMode.values());
 		if (te.getProductionTarget()== Items.AIR) {
-			blitButton(stack, DairyMachineTileEntity.WorkMode.CREAM, left , top, 0);
-			blitButton(stack, DairyMachineTileEntity.WorkMode.BUTTER, left , top, 0);
-			blitButton(stack, DairyMachineTileEntity.WorkMode.CHEESE, left , top, 0);
+			blitButtonUnSelected(stack ,unselecteds, left, top);
 		}
 		else {
-			List<DairyMachineTileEntity.WorkMode> unselecteds= Lists.newArrayList(DairyMachineTileEntity.WorkMode.values());
 			unselecteds.remove(DairyMachineTileEntity.WorkMode.getByItem(te.getProductionTarget()));
 			blitButtonSelected(stack, DairyMachineTileEntity.WorkMode.getByItem(te.getProductionTarget()), left, top);
 			if (te.isOperable()) {
@@ -88,15 +87,11 @@ public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContai
 	}
 
 	private void blitButtonUnSelected(MatrixStack stack, List<DairyMachineTileEntity.WorkMode> modes, int left, int top) {
-		for (DairyMachineTileEntity.WorkMode mode : modes) {
-			blitButton(stack, mode, left, top, 0);
-		}
+		modes.stream().map(mode -> {blitButton(stack, mode, left, top ,0); return mode;}).collect(Collectors.toList());
 	}
 
 	private void blitButtonCantSelected(MatrixStack stack, List<DairyMachineTileEntity.WorkMode> modes, int left, int top) {
-		for (DairyMachineTileEntity.WorkMode mode : modes) {
-			blitButton(stack, mode, left, top, 36);
-		}
+		modes.stream().map(mode -> {blitButton(stack, mode, left, top, 36); return mode;}).collect(Collectors.toList());
 	}
 
 	@Override
