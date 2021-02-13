@@ -30,7 +30,7 @@ public class DairyMachineGuiContainer extends ContainerScreen<DairyMachineContai
 	private static final ProduceButtonPosition produceCheeseButton=new ProduceButtonPosition(102, 51);
 
 	public DairyMachineGuiContainer(DairyMachineContainer container, PlayerInventory pi, ITextComponent title) {
-		super(container,pi,title);
+		super(container, pi, title);
 	}
 
 	@Override
