@@ -15,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class CheeseItem extends Item implements IProduceItem {
 	public CheeseItem() {
-		super(new Properties().group(ItemGroup.FOOD).rarity(Rarity.UNCOMMON).food(new Food.Builder().hunger(7).saturation(1f).effect(()->new EffectInstance(Effects.SLOWNESS,20*Constants.TICK_EACH_SECOND),0.2f).build()));
+		super(new Properties().group(ItemGroup.FOOD).rarity(Rarity.UNCOMMON).food(new Food.Builder().hunger(6).saturation(1f).effect(()->new EffectInstance(Effects.SLOWNESS,20*Constants.TICK_EACH_SECOND),0.2f).build()));
 	}
 	
 	@Override
