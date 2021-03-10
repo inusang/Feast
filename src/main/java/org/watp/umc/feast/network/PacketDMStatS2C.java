@@ -44,10 +44,12 @@ public class PacketDMStatS2C {
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(()-> {
 			DairyMachineTileEntity te=(DairyMachineTileEntity) Minecraft.getInstance().world.getTileEntity(pos);
-			te.setOperable(operable);
-			te.setProgress(progress);
-			te.setProgressVisible(progressVisible);
-			te.setProductionTarget(productionTargetName);
+			if (te!=null) {
+				te.setOperable(operable);
+				te.setProgress(progress);
+				te.setProgressVisible(progressVisible);
+				te.setProductionTarget(productionTargetName);
+			}
 		});
 		ctx.get().setPacketHandled(true);
 	}

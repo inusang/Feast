@@ -138,6 +138,7 @@ public class OvenContainer extends CommonInteractContainer {
 				return te.getOpen() & 0xffff;
 			}
 		});
+
 	}
 
 	private class OvenMaterialSlot extends SlotItemHandler {

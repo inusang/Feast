@@ -48,11 +48,13 @@ public class PacketOvenStatS2C {
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(()-> {
 			OvenTileEntity te=(OvenTileEntity) Minecraft.getInstance().world.getTileEntity(pos);
-			te.setProgress(progress);
-			te.setTemperature(temperature);
-			te.setRemainingEnergy(remainingEnergy);
-			te.setRemainingCooling(remainingCooling);
-			te.setOpen(open);
+			if (te!=null) {
+				te.setProgress(progress);
+				te.setTemperature(temperature);
+				te.setRemainingEnergy(remainingEnergy);
+				te.setRemainingCooling(remainingCooling);
+				te.setOpen(open);
+			}
 		});
 		ctx.get().setPacketHandled(true);
 	}
