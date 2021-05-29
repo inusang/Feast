@@ -22,7 +22,7 @@ public class OvenRecipe {
 	private static final List<Item> RECIPE_POTATO_BEEF_PIE= Arrays.asList(
 			Feast.Items.WHEATMEAL, Feast.Items.SALT, Feast.Items.WHEATMEAL,
 			Items.BAKED_POTATO, Items.COOKED_BEEF, Items.BAKED_POTATO,
-			Feast.Items.WHEATMEAL, Items.EGG, Feast.Items.WHEATMEAL
+			Feast.Items.WHEATMEAL, Feast.Items.COOKED_EGG, Feast.Items.WHEATMEAL
 	);
 
 	private static final List<Item> RECIPE_PIZZA_PART= Arrays.asList(
@@ -34,12 +34,12 @@ public class OvenRecipe {
 	private static final List<Item> RECIPE_COD_PASTRY= Arrays.asList(
 			Feast.Items.WHEATMEAL, Feast.Items.SALT, Feast.Items.WHEATMEAL,
 			Feast.Items.WHEATMEAL, Items.COOKED_COD, Feast.Items.WHEATMEAL,
-			Feast.Items.WHEATMEAL, Items.EGG, Feast.Items.WHEATMEAL);
+			Feast.Items.WHEATMEAL, Feast.Items.COOKED_EGG, Feast.Items.WHEATMEAL);
 
 	private static final List<Item> RECIPE_SALMON_ROLL= Arrays.asList(
 			Feast.Items.WHEATMEAL,Feast.Items.SALT,Feast.Items.WHEATMEAL,
 			Items.AIR,Items.COOKED_SALMON,Items.AIR,							//cabbage,cucumber
-			Feast.Items.WHEATMEAL, Items.EGG,Feast.Items.WHEATMEAL
+			Feast.Items.WHEATMEAL, Feast.Items.COOKED_EGG,Feast.Items.WHEATMEAL
 	);
 
 	static {

@@ -134,6 +134,7 @@ public class Feast
 
 	    public static final Item CABBAGE_SEEDS=null;
 
+	    public static final Item COOKED_EGG=null;
 	    public static final Item CREAM=null;
 	    public static final Item BUTTER=null;
 	    public static final Item CHEESE=null;

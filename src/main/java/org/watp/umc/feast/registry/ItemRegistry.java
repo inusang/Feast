@@ -2,12 +2,7 @@ package org.watp.umc.feast.registry;
 
 import org.watp.umc.feast.Feast;
 import org.watp.umc.feast.item.*;
-import org.watp.umc.feast.item.food.ApplePieItem;
-import org.watp.umc.feast.item.food.CheeseItem;
-import org.watp.umc.feast.item.food.CodBarItem;
-import org.watp.umc.feast.item.food.PizzaPartItem;
-import org.watp.umc.feast.item.food.PotatoBeefPieItem;
-import org.watp.umc.feast.item.food.SalmonRollItem;
+import org.watp.umc.feast.item.food.*;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -28,7 +23,8 @@ public abstract class ItemRegistry {
 	
 	public static RegistryObject<Item> WHEATMEAL=ITEMS.register("wheatmeal",WheatmealItem::new);
 	public static RegistryObject<Item> SALT=ITEMS.register("salt",SaltItem::new);
-	
+
+	public static RegistryObject<Item> COOKED_EGG=ITEMS.register("cooked_egg",CookedEggItem::new);
 	public static RegistryObject<Item> CREAM=ITEMS.register("cream",CreamItem::new);
 	public static RegistryObject<Item> BUTTER=ITEMS.register("butter",ButterItem::new);
 	public static RegistryObject<Item> CHEESE=ITEMS.register("cheese",CheeseItem::new);
