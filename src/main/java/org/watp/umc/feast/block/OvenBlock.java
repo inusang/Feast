@@ -42,7 +42,7 @@ public class OvenBlock extends DestroyedGuiAutoCloseBlock {
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
-	
+
 	@Override
 	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
 		int ovenStat=state.func_235903_d_(OVEN_STAT).orElse(0);
